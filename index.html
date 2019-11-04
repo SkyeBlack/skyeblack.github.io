@@ -61,6 +61,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue-electron-packager" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/04/vue-electron-packager/" class="article-date">
+  <time datetime="2019-11-04T09:49:53.104Z" itemprop="datePublished">2019-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/04/vue-electron-packager/">VUE+ELECTRON打包桌面程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="下载electron资源"><a href="#下载electron资源" class="headerlink" title="下载electron资源"></a>下载electron资源</h1><p><code>git clone https://github.com/electron/electron-quick-start</code><br><code>注：npm install electron失败，提示删除重试，可能是node版本（过高）的问题</code></p>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>在需要打包的项目中安装</p>
+<h2 id="安装electron"><a href="#安装electron" class="headerlink" title="安装electron"></a>安装electron</h2><p><code>npm install electron --save-dev</code></p>
+<img src="/image/vue_electron_install.png" class="" title="vue_electron_install">
+
+<h2 id="安装打包工具"><a href="#安装打包工具" class="headerlink" title="安装打包工具"></a>安装打包工具</h2><p><code>npm install electron-packager --save-dev</code></p>
+<img src="/image/vue_electron_packager.png" class="" title="vue_electron_packager">
+
+<h1 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h1><p>将electron/electron-quick-start项目下的main.js拷贝到需要打包的项目的根目录下（vue2放到build目录下），不要改名<br>注意修改文件中loadFile的文件路径，例如mainWindow.loadFile(‘./dist/index.html’)</p>
+<img src="/image/vue_electron_main.png" class="" title="vue_electron_main">
+
+<h1 id="修改package-json"><a href="#修改package-json" class="headerlink" title="修改package.json"></a>修改package.json</h1><ul>
+<li><p>添加”main”: “main.js”</p>
+</li>
+<li><p>添加启动命令：”start”: “electron .”</p>
+</li>
+<li><p>用<code>npm start</code>启动</p>
+<img src="/image/vue_electron_start.png" class="" title="vue_electron_start"></li>
+<li><p>可将”start”修改为其他名字，如”electron_dev”，用<code>npm run electron_dev</code>启动</p>
+<img src="/image/vue_electron_dev.png" class="" title="vue_electron_dev"></li>
+<li><p>可以在启动命令中添加<code>npm run build</code>，则执行该命令时将先执行一次build</p>
+<img src="/image/vue_electron_build.png" class="" title="vue_electron_build">
+<h1 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h1><p>按照步骤4中的命令启动，必须保证存在dist目录</p>
+<h1 id="白屏"><a href="#白屏" class="headerlink" title="白屏"></a>白屏</h1></li>
+<li><p>vue2</p>
+<img src="/image/vue_electron_white2.png" class="" title="vue_electron_white2"></li>
+<li><p>vue3</p>
+<img src="/image/vue_electron_white3.png" class="" title="vue_electron_white3">
+<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><h2 id="修改package-json-1"><a href="#修改package-json-1" class="headerlink" title="修改package.json"></a>修改package.json</h2><p><code>&quot;electron_build&quot;:&quot;electron-packager ./dist/ --out ./exe/ --platform=win32 --arch=x64 --icon=./public/header.ico --overwrite&quot;</code><br>electron-packager <sourcedir> <appname> –out <targetdir> –platform=<platform> –arch=<arch> –icon=headericodir [optional flags…]</p>
+<img src="/image/vue_electron_packager2.png" class="" title="vue_electron_packager2">
+
+</li>
+</ul>
+<h2 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h2><ul>
+<li>将项目中的<code>main.js</code>和<code>package.js</code>复制到dist目录下</li>
+<li>修改main.js的<code>mainWindow.loadFile(&#39;./index.html&#39;)</code><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2>运行打包命令<code>npm run electron_build</code><img src="/image/vue_electron_packager3.png" class="" title="vue_electron_packager3">
+
+</li>
+</ul>
+<img src="/image/vue_electron_packager4.png" class="" title="vue_electron_packager4">
+
+<img src="/image/vue_electron_packager5.png" class="" title="vue_electron_packager5">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/04/vue-electron-packager/" data-id="ck2k90kzb0000bsu6abz3chng" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vue-env-construction" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/04/vue-env-construction/" class="article-date">
@@ -365,6 +444,10 @@ vue3.0要求nodejs&gt;=8.9</code></p>
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/04/vue-electron-packager/">VUE+ELECTRON打包桌面程序</a>
+          </li>
         
           <li>
             <a href="/2019/11/04/vue-env-construction/">VUE环境搭建</a>
