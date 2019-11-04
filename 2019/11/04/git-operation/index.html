@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>GIT常用操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="注册账号https:&#x2F;&#x2F;github.com&#x2F;默认操作下一步直到结束，可能第一步需要反复操作才能成功 下载安装Githttps:&#x2F;&#x2F;git-scm.com&#x2F;downloads 生成秘钥打开git-bash$ ssh-keygen -t rsa -C “youremail@youremail.com“ 添加秘钥 先确认ssh-agent处于启用状态：eval “$(ssh-agent -s)” 输出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GIT常用操作">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;git-operation&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注册账号https:&#x2F;&#x2F;github.com&#x2F;默认操作下一步直到结束，可能第一步需要反复操作才能成功 下载安装Githttps:&#x2F;&#x2F;git-scm.com&#x2F;downloads 生成秘钥打开git-bash$ ssh-keygen -t rsa -C “youremail@youremail.com“ 添加秘钥 先确认ssh-agent处于启用状态：eval “$(ssh-agent -s)” 输出">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_prikey.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_setting.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_setting2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_setting3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_clone.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_clone2.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_rebase.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_amend.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_rebase2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_skip.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_skip2.png">
+<meta property="og:updated_time" content="2019-11-04T06:50:50.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;image&#x2F;git_prikey.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git-operation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/04/git-operation/" class="article-date">
+  <time datetime="2019-11-04T06:14:24.871Z" itemprop="datePublished">2019-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GIT常用操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h1><p><a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a><br>默认操作下一步直到结束，可能第一步需要反复操作才能成功</p>
+<h1 id="下载安装Git"><a href="#下载安装Git" class="headerlink" title="下载安装Git"></a>下载安装Git</h1><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+<h1 id="生成秘钥"><a href="#生成秘钥" class="headerlink" title="生成秘钥"></a>生成秘钥</h1><p>打开git-bash<br>$ ssh-keygen -t rsa -C “<a href="mailto:youremail@youremail.com" target="_blank" rel="noopener">youremail@youremail.com</a>“</p>
+<h1 id="添加秘钥"><a href="#添加秘钥" class="headerlink" title="添加秘钥"></a>添加秘钥</h1><ol>
+<li>先确认ssh-agent处于启用状态：eval “$(ssh-agent -s)”</li>
+<li>输出类似于：Agent pid 32070</li>
+<li>然后将SSH key添加到ssh-agent：ssh-add ~/.ssh/id_rsa</li>
+<li>这时又会要你输入密码：Enter passphrase for /home/xxx/.ssh/id_rsa: 输入刚才记起来的密码<br><img src="../image/git_prikey.png" alt="git_prikey"><h1 id="添加配置"><a href="#添加配置" class="headerlink" title="添加配置"></a>添加配置</h1><img src="../image/git_setting.png" alt="git-setting"><br><img src="../image/git_setting2.png" alt="git_setting2"><br><img src="../image/git_setting3.png" alt="git_setting3"><br>复制.pub的<code>所有内容</code>到key并保存</li>
+</ol>
+<h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><p>这是全局配置，可以不配置<br>$ git config –global user.name “your name”<br>$ git config –global user.email “<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>“</p>
+<h1 id="检出仓库"><a href="#检出仓库" class="headerlink" title="检出仓库"></a>检出仓库</h1><p>可以使用客户端：<a href="https://desktop.github.com/" target="_blank" rel="noopener">https://desktop.github.com/</a><br>也可以使用git-bash<br><img src="../image/git_clone.png" alt="git_clone"><br><img src="../image/git_clone2.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70" alt="git_clone2"></p>
+<h1 id="修改commit注释"><a href="#修改commit注释" class="headerlink" title="修改commit注释"></a>修改commit注释</h1><h2 id="修改最后一次注释"><a href="#修改最后一次注释" class="headerlink" title="修改最后一次注释"></a>修改最后一次注释</h2><p>如果你只想修改最后一次注释（就是最新的一次提交），那好办：<br><code>git commit --amend</code><br>出现有注释的界面（你的注释应该显示在第一行）， 输入<code>i</code>进入修改模式，修改好注释后，按<code>Esc</code>键 退出编辑模式，输入<code>:wq</code>保存并退出。ok，修改完成。</p>
+<h2 id="修改之前的某次注释"><a href="#修改之前的某次注释" class="headerlink" title="修改之前的某次注释"></a>修改之前的某次注释</h2><ol>
+<li>输入：<br><code>git rebase -i HEAD~2</code><br>最后的数字<code>2</code>指的是显示到倒数第几次，比如这个输入的2就会显示倒数的两次注释（最上面两行）<br><img src="../image/git_rebase.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70" alt="git_rebase"></li>
+<li>修改状态<br>将要修改的注释前面的<code>pick</code>换成<code>edit</code>。<br>方法就是上面说的编辑方式：<code>i</code>—编辑，把<code>pick</code>换成<code>edit</code>—<code>Esc</code>—<code>:wq</code>.<ol start="3">
+<li>修改注释：<br><code>git commit --amend</code><br><img src="../image/git_amend.png" alt="git_amend"><br><code>i</code>—编辑，修改好后<code>Esc</code>—<code>:wq</code>.</li>
+<li>继续修改：<br><code>git rebase --continue</code><br><img src="../image/git_rebase2.png" alt="git_rebase2"></li>
+<li>跳过修改：<br><code>git rebase --skip</code><br><img src="../image/git_skip.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RlZF9za3k=,size_16,color_FFFFFF,t_70" alt="git_skip"><br><img src="../image/git_skip2.png" alt="git_skip2"></li>
+<li>修改完成<br><code>git pull</code><br><code>git push</code></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/04/git-operation/" data-id="ck2k2ke480000fku63m1dbshq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/04/vue-env-construction/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VUE环境搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/31/github-pages-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">github pages + hexo 搭建个人博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/04/vue-env-construction/">VUE环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/04/git-operation/">GIT常用操作</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/31/github-pages-hexo/">github pages + hexo 搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/31/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
