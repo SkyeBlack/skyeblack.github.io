@@ -5,16 +5,13 @@
   
 
   
-  <title>Hello World | Skye Black Blog</title>
+  <title>Skye Black Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;2019&#x2F;10&#x2F;31&#x2F;hello-world&#x2F;index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Skye Black Blog">
+<meta property="og:url" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;page&#x2F;2&#x2F;index.html">
 <meta property="og:site_name" content="Skye Black Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-31T08:28:17.000Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Skye Black Blog" type="application/atom+xml">
@@ -62,7 +59,100 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-github-pages-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/31/github-pages-hexo/" class="article-date">
+  <time datetime="2019-10-31T09:37:21.455Z" itemprop="datePublished">2019-10-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/31/github-pages-hexo/">github pages + hexo 搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h1><p>仓库名一定是  <code>用户名.github.io</code></p>
+ <img src="/image/github_newrepository.png" class="" title="github_newrepository">
+
+<h1 id="开启github-page"><a href="#开启github-page" class="headerlink" title="开启github page"></a>开启github page</h1> <img src="/image/github_page.png" class="" title="github_page">
+
+<p>默认开启</p>
+<img src="/image/github_page2.png" class="" title="github_page2">
+<p>选择主题</p>
+<img src="/image/github_page3.png" class="" title="github_page3">
+<p><code>选择完成后即可通过上面的网址访问：https://skyeblack.github.io/</code></p>
+<h1 id="修改网页"><a href="#修改网页" class="headerlink" title="修改网页"></a>修改网页</h1><p>添加一个index.html网页</p>
+<img src="/image/blog_html.png" class="" title="blog_html">
+
+<img src="/image/blog_html2.png" class="" title="blog_html2">
+
+<p>提交代码到github，刷新个人网址：<code>https://skyeblack.github.io/</code></p>
+<img src="/image/blog_html3.png" class="" title="blog_html3">
+
+<h1 id="HEXO"><a href="#HEXO" class="headerlink" title="HEXO"></a>HEXO</h1><p>HEXO官网： <a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a> </p>
+<h2 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h2><p><code>npm install -g hexo-cli</code></p>
+<img src="/image/hexo_install.png" class="" title="hexo_install">
+
+<h2 id="新建网站"><a href="#新建网站" class="headerlink" title="新建网站"></a>新建网站</h2><p><code>不要跟github.io放同一个仓库，把源码和网站分开</code></p>
+<img src="/image/hexo_new.png" class="" title="hexo_new">
+<p><code>hexo init [folder]</code></p>
+<ul>
+<li><p>folder 博客源码程序目录</p>
+ <img src="/image/hexo_new2.png" class="" title="hexo_new2">
+
+<img src="/image/hexo_new3.png" class="" title="hexo_new3">
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><p><code>hexo server</code></p>
+</li>
+</ul>
+<img src="/image/hexo_server.png" class="" title="hexo_server">
+
+<img src="/image/hexo_blog.png" class="" title="hexo_blog">
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p><code>npm install hexo-deployer-git --save</code></p>
+<h2 id="修改-config-yml"><a href="#修改-config-yml" class="headerlink" title="修改_config.yml"></a>修改_config.yml</h2><p><code>配置到博客仓库目录去，不是源码仓库</code></p>
+<img src="/image/hexo_config.png" class="" title="hexo_config">
+
+<p><code>提交到另一项目用下面这种方式</code></p>
+<img src="/image/hexo_config2.png" class="" title="hexo_config2">
+
+<ul>
+<li>repo 自己的博客路径</li>
+<li>branch 博客的分支，由于github限制必须在master，所以不能改<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><code>源码用git提交，但是博客代码不要用github的提交</code><br><code>hexo d -g</code><img src="/image/hexo_commit.png" class="" title="hexo_commit">
+
+</li>
+</ul>
+<img src="/image/hexo_commit2.png" class="" title="hexo_commit2">
+
+<h1 id="模板修改"><a href="#模板修改" class="headerlink" title="模板修改"></a>模板修改</h1><h2 id="header图标"><a href="#header图标" class="headerlink" title="header图标"></a>header图标</h2><p>修改主题内的config，配置中的路径是相对于source目录的路径</p>
+<img src="/image/hexo_ico.png" class="" title="hexo_ico">
+
+<h2 id="标题与作者"><a href="#标题与作者" class="headerlink" title="标题与作者"></a>标题与作者</h2><img src="/image/hexo_name.png" class="" title="hexo_name">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/10/31/github-pages-hexo/" data-id="ck2k6m7rz00013ku64v0562sp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/31/hello-world/" class="article-date">
   <time datetime="2019-10-31T08:35:28.086Z" itemprop="datePublished">2019-10-31</time>
@@ -75,8 +165,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Hello World
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/31/hello-world/">Hello World</a>
     </h1>
   
 
@@ -107,23 +197,16 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/10/31/github-pages-hexo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          github pages + hexo 搭建个人博客
-        
-      </div>
-    </a>
-  
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         

@@ -61,6 +61,200 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue-npm-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/vue-npm-plugin/" class="article-date">
+  <time datetime="2019-11-05T09:48:44.184Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/vue-npm-plugin/">npm插件开发(基于vue-cli3.x)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p><code>vue create your-project-name</code></p>
+<h1 id="调整目录"><a href="#调整目录" class="headerlink" title="调整目录"></a>调整目录</h1><ol>
+<li>将src修改为examples存放示例</li>
+<li>新建packages存放组件<img src="/image/vue_npm_path.png" class="" title="vue_npm_path">
+<h1 id="配置项目以支持新的目录结构"><a href="#配置项目以支持新的目录结构" class="headerlink" title="配置项目以支持新的目录结构"></a>配置项目以支持新的目录结构</h1>我们通过上一步的目录改造后，会遇到两个问题。</li>
+<li>src 目录更名为 examples ，导致项目无法运行</li>
+<li>新增 packages 目录，该目录未加入 webpack 编译<br><code>注：cli3 提供一个可选的 vue.config.js 配置文件。如果这个文件存在则他会被自动加载，所有的对项目和webpack的配置，都在这个文件中。</code><h2 id="重新配置入口，修改配置中的-pages-选项"><a href="#重新配置入口，修改配置中的-pages-选项" class="headerlink" title="重新配置入口，修改配置中的 pages 选项"></a>重新配置入口，修改配置中的 pages 选项</h2>新版 Vue CLI 支持使用 vue.config.js 中的 pages 选项构建一个多页面的应用。<br>这里使用 pages 修改入口到 examples</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    // 修改 src 为 examples</span><br><span class="line">    pages: &#123;</span><br><span class="line">        index: &#123;</span><br><span class="line">            entry: <span class="string">"examples/main.js"</span>,</span><br><span class="line">            template: <span class="string">"public/index.html"</span>,</span><br><span class="line">            filename: <span class="string">"index.html"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>支持对 packages 目录的处理，修改配置中的 chainWebpack 选项<br>packages 是我们新增的一个目录，默认是不被 webpack 处理的，所以需要添加配置对该目录的支持。<br>chainWebpack 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 扩展 webpack 配置，使 packages 加入编译</span><br><span class="line">    chainWebpack: config =&gt; &#123;</span><br><span class="line">        config.module</span><br><span class="line">            .rule(<span class="string">'js'</span>)</span><br><span class="line">            .include</span><br><span class="line">            .add(<span class="string">'/packages/'</span>)</span><br><span class="line">            .end()</span><br><span class="line">            .use(<span class="string">'babel'</span>)</span><br><span class="line">            .loader(<span class="string">'babel-loader'</span>)</span><br><span class="line">            .tap(options =&gt; &#123;</span><br><span class="line">                // 修改它的选项...</span><br><span class="line">                <span class="built_in">return</span> options</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h1><img src="/image/vue_npm_component.png" class="" title="vue_npm_component">
+<p>如图，menu就是一个组件。每个组件都要新建一个文件夹，然后添加index.js以及src文件夹。</p>
+<img src="/image/vue_npm_component2.png" class="" title="vue_npm_component2">
+
+<h1 id="导出组件"><a href="#导出组件" class="headerlink" title="导出组件"></a>导出组件</h1><img src="/image/vue_npm_component3.png" class="" title="vue_npm_component3">
+<h2 id="将packages中的所有组件导出"><a href="#将packages中的所有组件导出" class="headerlink" title="将packages中的所有组件导出"></a>将packages中的所有组件导出</h2><p>在packages文件夹下新建index.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 导入组件</span><br><span class="line">import tedMenu from <span class="string">"./menu/index.js"</span>;</span><br><span class="line"></span><br><span class="line">// 存储组件列表-数组方式</span><br><span class="line">// const components = [tedMenu]</span><br><span class="line"></span><br><span class="line">// 存储组件列表-对象方式</span><br><span class="line">const components = &#123;</span><br><span class="line">  tedMenu,</span><br><span class="line">  tedMenuItem: tedMenu.Item,</span><br><span class="line">  tedSubMenu: tedMenu.Sub</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册</span><br><span class="line">const install = <span class="keyword">function</span> (Vue) &#123;</span><br><span class="line">  // 判断是否安装</span><br><span class="line">  <span class="keyword">if</span> (install.installed) <span class="built_in">return</span>;</span><br><span class="line"></span><br><span class="line">  // 遍历注册全局组件-数组方式</span><br><span class="line">  // components.forEach(component =&gt; &#123;</span><br><span class="line">  //   Vue.component(component.name, component)</span><br><span class="line">  // &#125;);</span><br><span class="line"></span><br><span class="line">  // 遍历注册全局组件-对象方式</span><br><span class="line">  Object.keys(components).forEach(key =&gt; &#123;</span><br><span class="line">    Vue.component(key, components[key]);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 判断是否是直接引入文件</span><br><span class="line"><span class="keyword">if</span> (typeof window !== <span class="string">"undefined"</span> &amp;&amp; window.Vue) &#123;</span><br><span class="line">  install(window.Vue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  // 导出的对象必须具有 install，才能被 Vue.use() 方法安装</span><br><span class="line">  install,</span><br><span class="line">  // 以下是具体的组件列表</span><br><span class="line">  components: components</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="在项目中引入组件"><a href="#在项目中引入组件" class="headerlink" title="在项目中引入组件"></a>在项目中引入组件</h1><img src="/image/vue_npm_component4.png" class="" title="vue_npm_component4">
+<p>使用 Vue.use() 全局注册后，即可在任意页面直接使用了，而不需另外引入。当然也可以按需引入。</p>
+<img src="/image/vue_npm_component5.png" class="" title="vue_npm_component5">
+
+<p><code>npm run serve</code>执行后即可看到效果。</p>
+<h1 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h1><h2 id="package-js-中新增一条编译为库的命令"><a href="#package-js-中新增一条编译为库的命令" class="headerlink" title="package.js 中新增一条编译为库的命令"></a>package.js 中新增一条编译为库的命令</h2><p>在库模式中，Vue是外置的，这意味着即使在代码中引入了 Vue，打包后的文件也是不包含Vue的。<br>以下我们在 scripts 中新增一条命令 npm run lib</p>
+<ul>
+<li>–target : 构建目标，默认为应用模式。这里修改为 lib 启用库模式。</li>
+<li>–dest : 输出目录，默认 dist 。这里我们改成 lib</li>
+<li>[entry] : 最后一个参数为入口文件，默认为 src/App.vue 。这里我们指定编译 packages/ 组件库目录。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"script"</span>: &#123;</span><br><span class="line">	<span class="string">"lib"</span>: <span class="string">"vue-cli-service build --target lib --name tedview --dest lib packages/index.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="执行编译库命令"><a href="#执行编译库命令" class="headerlink" title="执行编译库命令"></a>执行编译库命令</h2><p><code>npm run lib</code></p>
+<img src="/image/vue_npm_lib.png" class="" title="vue_npm_lib">
+
+<h2 id="配置-package-json-文件中发布到-npm-的字段"><a href="#配置-package-json-文件中发布到-npm-的字段" class="headerlink" title="配置 package.json 文件中发布到 npm 的字段"></a>配置 package.json 文件中发布到 npm 的字段</h2><img src="/image/vue_npm_lib2.png" class="" title="vue_npm_lib2">
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h1 id="包名类似，拒绝发布"><a href="#包名类似，拒绝发布" class="headerlink" title="包名类似，拒绝发布"></a>包名类似，拒绝发布</h1><p>把包名中的标点符号去掉并与现有的包进行比较，相同则不允许发布<br>例如：react-native已经存在，那么诸如</p>
+<ul>
+<li>reactnative</li>
+<li>react_native</li>
+<li>react.native<br>就不可以再发布了<br><code>注：包版本不一定要增量，可以是任意不曾使用过的版本号</code><h2 id="使用作用域"><a href="#使用作用域" class="headerlink" title="使用作用域"></a>使用作用域</h2>如果因为你起的包名与现有的包名太相近而被阻止发布这个包，那么找到一个独一无二包名最简单方法就是使用自己的作用域。你可以使用@+你的npm用户名加在包名前面将包划到你的npm账户作用域下。比如，我的npm用户名是skyeblack，所以我的作用域是@skyeblack。<br>所以在package.json文件里把</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"name"</span>: <span class="string">"ted-view-vue"</span>,</span><br></pre></td></tr></table></figure>
+<p>修改成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"name"</span>: <span class="string">"@skyeblack/ted-view-vue"</span>,</span><br></pre></td></tr></table></figure>
+<p>然后我要发布这个包。被划了作用域的包默认是私有的，所以要通过<code>—access=public</code>让它变为公有的包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish --accesss=public</span><br></pre></td></tr></table></figure>
+<h2 id="添加-npmignore-文件，设置忽略发布文件"><a href="#添加-npmignore-文件，设置忽略发布文件" class="headerlink" title="添加.npmignore 文件，设置忽略发布文件"></a>添加.npmignore 文件，设置忽略发布文件</h2><p>我们发布到 npm 中，只有编译后的 lib 目录、package.json、README.md才是需要被发布的。所以我们需要设置忽略目录和文件。<br>和 .gitignore 的语法一样，具体需要提交什么文件，看各自的实际情况。</p>
+<img src="/image/vue_npm_publish.png" class="" title="vue_npm_publish">
+
+<h2 id="登录到-npm"><a href="#登录到-npm" class="headerlink" title="登录到 npm"></a>登录到 npm</h2><p>首先需要到 npm 上注册一个账号，注册过程略。<br>如果配置了淘宝镜像，先设置回npm镜像：</p>
+<img src="/image/vue_npm_publish2.png" class="" title="vue_npm_publish2">
+<p>然后在终端执行登录命令，输入用户名、密码、邮箱即可登录。<br><code>npm login</code></p>
+<h2 id="发布到-npm"><a href="#发布到-npm" class="headerlink" title="发布到 npm"></a>发布到 npm</h2><p>执行发布命令，发布组件到 npm<br><code>npm publish</code><br>执行后显示发布成功即可在npm官网上找到自己的包，如果没有发布成功，有可能是包名称和社区其他包重复了，改个名字即可。<br>被划了作用域的包默认是私有的，所以要通过<code>—access=public</code>让它变为公有的包</p>
+<img src="/image/vue_npm_publish3.png" class="" title="vue_npm_publish3">
+
+<h1 id="删除上传的包"><a href="#删除上传的包" class="headerlink" title="删除上传的包"></a>删除上传的包</h1><p>注意:根据规范，只有在发包的24小时内才允许撤销发布的包（ unpublish is only allowed with versions published in the last 24 hours）<br>终端打开包项目，输入<code>npm unpublish --force</code>：</p>
+<img src="/image/vue_npm_force.png" class="" title="vue_npm_force">
+
+<h2 id="删除指定版本的包"><a href="#删除指定版本的包" class="headerlink" title="删除指定版本的包"></a>删除指定版本的包</h2><p><code>npm unpublish @skyeblack/ted-view-vue@1.1.1</code><br>注：删除后的包名，若再次上传依然会被视为包已存在，需要修改成不同的版本号</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><img src="/image/vue_npm_use.png" class="" title="vue_npm_use">
+
+<img src="/image/vue_npm_use2.png" class="" title="vue_npm_use2">
+
+<img src="/image/vue_npm_use3.png" class="" title="vue_npm_use3">
+
+<img src="/image/vue_npm_use4.png" class="" title="vue_npm_use4">
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="初始化npm项目"><a href="#初始化npm项目" class="headerlink" title="初始化npm项目"></a>初始化npm项目</h2><p>实际是生成package.json文件</p>
+<img src="/image/vue_npm_init.png" class="" title="vue_npm_init">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"menu-bar"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">"adaptive menu"</span>,</span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"start test"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"keywords"</span>: [</span><br><span class="line">    <span class="string">"menu"</span>,</span><br><span class="line">    <span class="string">"hear"</span>,</span><br><span class="line">    <span class="string">"bar"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">"SkyeBlack"</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.jianshu.com/p/72d303449abc" target="_blank" rel="noopener">https://www.jianshu.com/p/72d303449abc</a></li>
+<li><a href="https://www.jianshu.com/p/aa109584983f" target="_blank" rel="noopener">https://www.jianshu.com/p/aa109584983f</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/vue-npm-plugin/" data-id="ck2loqlbo0002w0u6gk9u01nb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-html-component" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/vue-html-component/" class="article-date">
+  <time datetime="2019-11-05T08:46:52.324Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/vue-html-component/">在纯html页引入组件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var registerStepTwo = &#123;</span><br><span class="line">	props: [<span class="string">'data'</span>],</span><br><span class="line">	template: <span class="string">'&lt;div v-show="data.step==2"&gt;&lt;h1&gt;自定义组件!&lt;/h1&gt;&lt;/div&gt;'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="html页的js"><a href="#html页的js" class="headerlink" title="html页的js"></a>html页的js</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">	el: <span class="string">'#register'</span>,</span><br><span class="line">	components: &#123;</span><br><span class="line">		<span class="string">'customStepTwo'</span>: registerStepTwo</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="html页面"><a href="#html页面" class="headerlink" title="html页面"></a>html页面</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;custom-step-two :data=<span class="string">"registerForm"</span>&gt;&lt;/custom-step-two&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/vue-html-component/" data-id="ck2loqlbe0000w0u6e64n54e4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-faq" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/vue-faq/" class="article-date">
+  <time datetime="2019-11-05T06:49:57.640Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/vue-faq/">vue常见问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="打包白板"><a href="#打包白板" class="headerlink" title="打包白板"></a>打包白板</h1><h2 id="vue2"><a href="#vue2" class="headerlink" title="vue2"></a>vue2</h2><img src="/image/vue_build_white2.png" class="" title="vue_build_white2">
+<h2 id="vue3"><a href="#vue3" class="headerlink" title="vue3"></a>vue3</h2><img src="/image/vue_build_white3.png" class="" title="vue_build_white3">
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/vue-faq/" data-id="ck2loqlbk0001w0u64ei003be" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-os-win10-remoteerror" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/05/os-win10-remoteerror/" class="article-date">
@@ -494,147 +688,12 @@ vue3.0要求nodejs&gt;=8.9</code></p>
 
 
   
-    <article id="post-github-pages-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/31/github-pages-hexo/" class="article-date">
-  <time datetime="2019-10-31T09:37:21.455Z" itemprop="datePublished">2019-10-31</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/github-pages-hexo/">github pages + hexo 搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h1><p>仓库名一定是  <code>用户名.github.io</code></p>
- <img src="/image/github_newrepository.png" class="" title="github_newrepository">
-
-<h1 id="开启github-page"><a href="#开启github-page" class="headerlink" title="开启github page"></a>开启github page</h1> <img src="/image/github_page.png" class="" title="github_page">
-
-<p>默认开启</p>
-<img src="/image/github_page2.png" class="" title="github_page2">
-<p>选择主题</p>
-<img src="/image/github_page3.png" class="" title="github_page3">
-<p><code>选择完成后即可通过上面的网址访问：https://skyeblack.github.io/</code></p>
-<h1 id="修改网页"><a href="#修改网页" class="headerlink" title="修改网页"></a>修改网页</h1><p>添加一个index.html网页</p>
-<img src="/image/blog_html.png" class="" title="blog_html">
-
-<img src="/image/blog_html2.png" class="" title="blog_html2">
-
-<p>提交代码到github，刷新个人网址：<code>https://skyeblack.github.io/</code></p>
-<img src="/image/blog_html3.png" class="" title="blog_html3">
-
-<h1 id="HEXO"><a href="#HEXO" class="headerlink" title="HEXO"></a>HEXO</h1><p>HEXO官网： <a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a> </p>
-<h2 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h2><p><code>npm install -g hexo-cli</code></p>
-<img src="/image/hexo_install.png" class="" title="hexo_install">
-
-<h2 id="新建网站"><a href="#新建网站" class="headerlink" title="新建网站"></a>新建网站</h2><p><code>不要跟github.io放同一个仓库，把源码和网站分开</code></p>
-<img src="/image/hexo_new.png" class="" title="hexo_new">
-<p><code>hexo init [folder]</code></p>
-<ul>
-<li><p>folder 博客源码程序目录</p>
- <img src="/image/hexo_new2.png" class="" title="hexo_new2">
-
-<img src="/image/hexo_new3.png" class="" title="hexo_new3">
-<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><p><code>hexo server</code></p>
-</li>
-</ul>
-<img src="/image/hexo_server.png" class="" title="hexo_server">
-
-<img src="/image/hexo_blog.png" class="" title="hexo_blog">
-
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p><code>npm install hexo-deployer-git --save</code></p>
-<h2 id="修改-config-yml"><a href="#修改-config-yml" class="headerlink" title="修改_config.yml"></a>修改_config.yml</h2><p><code>配置到博客仓库目录去，不是源码仓库</code></p>
-<img src="/image/hexo_config.png" class="" title="hexo_config">
-
-<p><code>提交到另一项目用下面这种方式</code></p>
-<img src="/image/hexo_config2.png" class="" title="hexo_config2">
-
-<ul>
-<li>repo 自己的博客路径</li>
-<li>branch 博客的分支，由于github限制必须在master，所以不能改<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><code>源码用git提交，但是博客代码不要用github的提交</code><br><code>hexo d -g</code><img src="/image/hexo_commit.png" class="" title="hexo_commit">
-
-</li>
-</ul>
-<img src="/image/hexo_commit2.png" class="" title="hexo_commit2">
-
-<h1 id="模板修改"><a href="#模板修改" class="headerlink" title="模板修改"></a>模板修改</h1><h2 id="header图标"><a href="#header图标" class="headerlink" title="header图标"></a>header图标</h2><p>修改主题内的config，配置中的路径是相对于source目录的路径</p>
-<img src="/image/hexo_ico.png" class="" title="hexo_ico">
-
-<h2 id="标题与作者"><a href="#标题与作者" class="headerlink" title="标题与作者"></a>标题与作者</h2><img src="/image/hexo_name.png" class="" title="hexo_name">
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://skyeblack.github.io/2019/10/31/github-pages-hexo/" data-id="ck2k6m7rz00013ku64v0562sp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/31/hello-world/" class="article-date">
-  <time datetime="2019-10-31T08:35:28.086Z" itemprop="datePublished">2019-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://skyeblack.github.io/2019/10/31/hello-world/" data-id="ck2k6m7s600023ku68mvs4zx9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -665,23 +724,23 @@ vue3.0要求nodejs&gt;=8.9</code></p>
       <ul>
         
           <li>
+            <a href="/2019/11/05/vue-npm-plugin/">npm插件开发(基于vue-cli3.x)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-html-component/">在纯html页引入组件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-faq/">vue常见问题</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/05/os-win10-remoteerror/">win10远程错误配置</a>
           </li>
         
           <li>
             <a href="/2019/11/05/csharp-autoupdate/">C#自动更新程序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/05/os-win/">windows常用操作指令</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/05/os-ubuntu/">ubuntu常用操作指令</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/04/vue-electron-packager/">VUE+ELECTRON打包桌面程序</a>
           </li>
         
       </ul>

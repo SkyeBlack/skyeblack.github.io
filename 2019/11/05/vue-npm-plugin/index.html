@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>npm插件开发(基于vue-cli3.x) | Skye Black Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="创建项目vue create your-project-name 调整目录 将src修改为examples存放示例 新建packages存放组件 配置项目以支持新的目录结构我们通过上一步的目录改造后，会遇到两个问题。 src 目录更名为 examples ，导致项目无法运行 新增 packages 目录，该目录未加入 webpack 编译注：cli3 提供一个可选的 vue.config.js 配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm插件开发(基于vue-cli3.x)">
+<meta property="og:url" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;2019&#x2F;11&#x2F;05&#x2F;vue-npm-plugin&#x2F;index.html">
+<meta property="og:site_name" content="Skye Black Blog">
+<meta property="og:description" content="创建项目vue create your-project-name 调整目录 将src修改为examples存放示例 新建packages存放组件 配置项目以支持新的目录结构我们通过上一步的目录改造后，会遇到两个问题。 src 目录更名为 examples ，导致项目无法运行 新增 packages 目录，该目录未加入 webpack 编译注：cli3 提供一个可选的 vue.config.js 配">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_path.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_component.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_component2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_component3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_component4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_component5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_lib.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_lib2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_publish.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_publish2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_publish3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_force.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_use.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_use2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_use3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_use4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_init.png">
+<meta property="og:updated_time" content="2019-11-05T10:08:13.776Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;vue_npm_path.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Skye Black Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Skye Black Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://skyeblack.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-npm-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/vue-npm-plugin/" class="article-date">
+  <time datetime="2019-11-05T09:48:44.184Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      npm插件开发(基于vue-cli3.x)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p><code>vue create your-project-name</code></p>
+<h1 id="调整目录"><a href="#调整目录" class="headerlink" title="调整目录"></a>调整目录</h1><ol>
+<li>将src修改为examples存放示例</li>
+<li>新建packages存放组件<img src="/image/vue_npm_path.png" class="" title="vue_npm_path">
+<h1 id="配置项目以支持新的目录结构"><a href="#配置项目以支持新的目录结构" class="headerlink" title="配置项目以支持新的目录结构"></a>配置项目以支持新的目录结构</h1>我们通过上一步的目录改造后，会遇到两个问题。</li>
+<li>src 目录更名为 examples ，导致项目无法运行</li>
+<li>新增 packages 目录，该目录未加入 webpack 编译<br><code>注：cli3 提供一个可选的 vue.config.js 配置文件。如果这个文件存在则他会被自动加载，所有的对项目和webpack的配置，都在这个文件中。</code><h2 id="重新配置入口，修改配置中的-pages-选项"><a href="#重新配置入口，修改配置中的-pages-选项" class="headerlink" title="重新配置入口，修改配置中的 pages 选项"></a>重新配置入口，修改配置中的 pages 选项</h2>新版 Vue CLI 支持使用 vue.config.js 中的 pages 选项构建一个多页面的应用。<br>这里使用 pages 修改入口到 examples</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    // 修改 src 为 examples</span><br><span class="line">    pages: &#123;</span><br><span class="line">        index: &#123;</span><br><span class="line">            entry: <span class="string">"examples/main.js"</span>,</span><br><span class="line">            template: <span class="string">"public/index.html"</span>,</span><br><span class="line">            filename: <span class="string">"index.html"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>支持对 packages 目录的处理，修改配置中的 chainWebpack 选项<br>packages 是我们新增的一个目录，默认是不被 webpack 处理的，所以需要添加配置对该目录的支持。<br>chainWebpack 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 扩展 webpack 配置，使 packages 加入编译</span><br><span class="line">    chainWebpack: config =&gt; &#123;</span><br><span class="line">        config.module</span><br><span class="line">            .rule(<span class="string">'js'</span>)</span><br><span class="line">            .include</span><br><span class="line">            .add(<span class="string">'/packages/'</span>)</span><br><span class="line">            .end()</span><br><span class="line">            .use(<span class="string">'babel'</span>)</span><br><span class="line">            .loader(<span class="string">'babel-loader'</span>)</span><br><span class="line">            .tap(options =&gt; &#123;</span><br><span class="line">                // 修改它的选项...</span><br><span class="line">                <span class="built_in">return</span> options</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h1><img src="/image/vue_npm_component.png" class="" title="vue_npm_component">
+<p>如图，menu就是一个组件。每个组件都要新建一个文件夹，然后添加index.js以及src文件夹。</p>
+<img src="/image/vue_npm_component2.png" class="" title="vue_npm_component2">
+
+<h1 id="导出组件"><a href="#导出组件" class="headerlink" title="导出组件"></a>导出组件</h1><img src="/image/vue_npm_component3.png" class="" title="vue_npm_component3">
+<h2 id="将packages中的所有组件导出"><a href="#将packages中的所有组件导出" class="headerlink" title="将packages中的所有组件导出"></a>将packages中的所有组件导出</h2><p>在packages文件夹下新建index.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 导入组件</span><br><span class="line">import tedMenu from <span class="string">"./menu/index.js"</span>;</span><br><span class="line"></span><br><span class="line">// 存储组件列表-数组方式</span><br><span class="line">// const components = [tedMenu]</span><br><span class="line"></span><br><span class="line">// 存储组件列表-对象方式</span><br><span class="line">const components = &#123;</span><br><span class="line">  tedMenu,</span><br><span class="line">  tedMenuItem: tedMenu.Item,</span><br><span class="line">  tedSubMenu: tedMenu.Sub</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册</span><br><span class="line">const install = <span class="keyword">function</span> (Vue) &#123;</span><br><span class="line">  // 判断是否安装</span><br><span class="line">  <span class="keyword">if</span> (install.installed) <span class="built_in">return</span>;</span><br><span class="line"></span><br><span class="line">  // 遍历注册全局组件-数组方式</span><br><span class="line">  // components.forEach(component =&gt; &#123;</span><br><span class="line">  //   Vue.component(component.name, component)</span><br><span class="line">  // &#125;);</span><br><span class="line"></span><br><span class="line">  // 遍历注册全局组件-对象方式</span><br><span class="line">  Object.keys(components).forEach(key =&gt; &#123;</span><br><span class="line">    Vue.component(key, components[key]);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 判断是否是直接引入文件</span><br><span class="line"><span class="keyword">if</span> (typeof window !== <span class="string">"undefined"</span> &amp;&amp; window.Vue) &#123;</span><br><span class="line">  install(window.Vue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  // 导出的对象必须具有 install，才能被 Vue.use() 方法安装</span><br><span class="line">  install,</span><br><span class="line">  // 以下是具体的组件列表</span><br><span class="line">  components: components</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="在项目中引入组件"><a href="#在项目中引入组件" class="headerlink" title="在项目中引入组件"></a>在项目中引入组件</h1><img src="/image/vue_npm_component4.png" class="" title="vue_npm_component4">
+<p>使用 Vue.use() 全局注册后，即可在任意页面直接使用了，而不需另外引入。当然也可以按需引入。</p>
+<img src="/image/vue_npm_component5.png" class="" title="vue_npm_component5">
+
+<p><code>npm run serve</code>执行后即可看到效果。</p>
+<h1 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h1><h2 id="package-js-中新增一条编译为库的命令"><a href="#package-js-中新增一条编译为库的命令" class="headerlink" title="package.js 中新增一条编译为库的命令"></a>package.js 中新增一条编译为库的命令</h2><p>在库模式中，Vue是外置的，这意味着即使在代码中引入了 Vue，打包后的文件也是不包含Vue的。<br>以下我们在 scripts 中新增一条命令 npm run lib</p>
+<ul>
+<li>–target : 构建目标，默认为应用模式。这里修改为 lib 启用库模式。</li>
+<li>–dest : 输出目录，默认 dist 。这里我们改成 lib</li>
+<li>[entry] : 最后一个参数为入口文件，默认为 src/App.vue 。这里我们指定编译 packages/ 组件库目录。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"script"</span>: &#123;</span><br><span class="line">	<span class="string">"lib"</span>: <span class="string">"vue-cli-service build --target lib --name tedview --dest lib packages/index.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="执行编译库命令"><a href="#执行编译库命令" class="headerlink" title="执行编译库命令"></a>执行编译库命令</h2><p><code>npm run lib</code></p>
+<img src="/image/vue_npm_lib.png" class="" title="vue_npm_lib">
+
+<h2 id="配置-package-json-文件中发布到-npm-的字段"><a href="#配置-package-json-文件中发布到-npm-的字段" class="headerlink" title="配置 package.json 文件中发布到 npm 的字段"></a>配置 package.json 文件中发布到 npm 的字段</h2><img src="/image/vue_npm_lib2.png" class="" title="vue_npm_lib2">
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h1 id="包名类似，拒绝发布"><a href="#包名类似，拒绝发布" class="headerlink" title="包名类似，拒绝发布"></a>包名类似，拒绝发布</h1><p>把包名中的标点符号去掉并与现有的包进行比较，相同则不允许发布<br>例如：react-native已经存在，那么诸如</p>
+<ul>
+<li>reactnative</li>
+<li>react_native</li>
+<li>react.native<br>就不可以再发布了<br><code>注：包版本不一定要增量，可以是任意不曾使用过的版本号</code><h2 id="使用作用域"><a href="#使用作用域" class="headerlink" title="使用作用域"></a>使用作用域</h2>如果因为你起的包名与现有的包名太相近而被阻止发布这个包，那么找到一个独一无二包名最简单方法就是使用自己的作用域。你可以使用@+你的npm用户名加在包名前面将包划到你的npm账户作用域下。比如，我的npm用户名是skyeblack，所以我的作用域是@skyeblack。<br>所以在package.json文件里把</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"name"</span>: <span class="string">"ted-view-vue"</span>,</span><br></pre></td></tr></table></figure>
+<p>修改成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"name"</span>: <span class="string">"@skyeblack/ted-view-vue"</span>,</span><br></pre></td></tr></table></figure>
+<p>然后我要发布这个包。被划了作用域的包默认是私有的，所以要通过<code>—access=public</code>让它变为公有的包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish --accesss=public</span><br></pre></td></tr></table></figure>
+<h2 id="添加-npmignore-文件，设置忽略发布文件"><a href="#添加-npmignore-文件，设置忽略发布文件" class="headerlink" title="添加.npmignore 文件，设置忽略发布文件"></a>添加.npmignore 文件，设置忽略发布文件</h2><p>我们发布到 npm 中，只有编译后的 lib 目录、package.json、README.md才是需要被发布的。所以我们需要设置忽略目录和文件。<br>和 .gitignore 的语法一样，具体需要提交什么文件，看各自的实际情况。</p>
+<img src="/image/vue_npm_publish.png" class="" title="vue_npm_publish">
+
+<h2 id="登录到-npm"><a href="#登录到-npm" class="headerlink" title="登录到 npm"></a>登录到 npm</h2><p>首先需要到 npm 上注册一个账号，注册过程略。<br>如果配置了淘宝镜像，先设置回npm镜像：</p>
+<img src="/image/vue_npm_publish2.png" class="" title="vue_npm_publish2">
+<p>然后在终端执行登录命令，输入用户名、密码、邮箱即可登录。<br><code>npm login</code></p>
+<h2 id="发布到-npm"><a href="#发布到-npm" class="headerlink" title="发布到 npm"></a>发布到 npm</h2><p>执行发布命令，发布组件到 npm<br><code>npm publish</code><br>执行后显示发布成功即可在npm官网上找到自己的包，如果没有发布成功，有可能是包名称和社区其他包重复了，改个名字即可。<br>被划了作用域的包默认是私有的，所以要通过<code>—access=public</code>让它变为公有的包</p>
+<img src="/image/vue_npm_publish3.png" class="" title="vue_npm_publish3">
+
+<h1 id="删除上传的包"><a href="#删除上传的包" class="headerlink" title="删除上传的包"></a>删除上传的包</h1><p>注意:根据规范，只有在发包的24小时内才允许撤销发布的包（ unpublish is only allowed with versions published in the last 24 hours）<br>终端打开包项目，输入<code>npm unpublish --force</code>：</p>
+<img src="/image/vue_npm_force.png" class="" title="vue_npm_force">
+
+<h2 id="删除指定版本的包"><a href="#删除指定版本的包" class="headerlink" title="删除指定版本的包"></a>删除指定版本的包</h2><p><code>npm unpublish @skyeblack/ted-view-vue@1.1.1</code><br>注：删除后的包名，若再次上传依然会被视为包已存在，需要修改成不同的版本号</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><img src="/image/vue_npm_use.png" class="" title="vue_npm_use">
+
+<img src="/image/vue_npm_use2.png" class="" title="vue_npm_use2">
+
+<img src="/image/vue_npm_use3.png" class="" title="vue_npm_use3">
+
+<img src="/image/vue_npm_use4.png" class="" title="vue_npm_use4">
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="初始化npm项目"><a href="#初始化npm项目" class="headerlink" title="初始化npm项目"></a>初始化npm项目</h2><p>实际是生成package.json文件</p>
+<img src="/image/vue_npm_init.png" class="" title="vue_npm_init">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"menu-bar"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">"adaptive menu"</span>,</span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"start test"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"keywords"</span>: [</span><br><span class="line">    <span class="string">"menu"</span>,</span><br><span class="line">    <span class="string">"hear"</span>,</span><br><span class="line">    <span class="string">"bar"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">"SkyeBlack"</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.jianshu.com/p/72d303449abc" target="_blank" rel="noopener">https://www.jianshu.com/p/72d303449abc</a></li>
+<li><a href="https://www.jianshu.com/p/aa109584983f" target="_blank" rel="noopener">https://www.jianshu.com/p/aa109584983f</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/vue-npm-plugin/" data-id="ck2loqlbo0002w0u6gk9u01nb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/05/vue-html-component/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在纯html页引入组件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/05/vue-npm-plugin/">npm插件开发(基于vue-cli3.x)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-html-component/">在纯html页引入组件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-faq/">vue常见问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/os-win10-remoteerror/">win10远程错误配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/csharp-autoupdate/">C#自动更新程序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Skye Black<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
