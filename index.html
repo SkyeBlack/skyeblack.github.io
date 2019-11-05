@@ -61,6 +61,225 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-os-win10-remoteerror" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/os-win10-remoteerror/" class="article-date">
+  <time datetime="2019-11-05T03:54:08.267Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/os-win10-remoteerror/">win10远程错误配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/image/os_win10_remote_error.png" class="" title="os_win10_remote_error">
+
+<h1 id="gpedit-msc"><a href="#gpedit-msc" class="headerlink" title="gpedit.msc"></a>gpedit.msc</h1><p>进入控制台：<code>cmd</code></p>
+<img src="/image/os_win10_gpedit.png" class="" title="os_win10_gpedit">
+
+<h1 id="本地组策略编辑器"><a href="#本地组策略编辑器" class="headerlink" title="本地组策略编辑器"></a>本地组策略编辑器</h1><p>计算机配置&gt;管理模板&gt;系统&gt;凭据分配&gt;加密Oracle修正</p>
+<img src="/image/os_win10_remote_error2.png" class="" title="os_win10_remote_error2">
+
+<h1 id="策略设置"><a href="#策略设置" class="headerlink" title="策略设置"></a>策略设置</h1><p>已启用、易受攻击</p>
+<img src="/image/os_win10_remote_error3.png" class="" title="os_win10_remote_error3">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/os-win10-remoteerror/" data-id="ck2lbqcaa0003n4u624xhhpdp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-csharp-autoupdate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/csharp-autoupdate/" class="article-date">
+  <time datetime="2019-11-05T02:33:17.484Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/csharp-autoupdate/">C#自动更新程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="下载更新配置文件"><a href="#下载更新配置文件" class="headerlink" title="下载更新配置文件"></a>下载更新配置文件</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xdoc = XDocument.Load(<span class="string">"https://github.com/../releases/download/v10/version.xml"</span>);<span class="comment">//版本配置文件地址</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="更新配置文件模板"><a href="#更新配置文件模板" class="headerlink" title="更新配置文件模板"></a>更新配置文件模板</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;update minimum=<span class="string">'1.0.2.4'</span> latest=<span class="string">'1.0.2.4'</span>&gt;</span><br><span class="line">&lt;release version=<span class="string">'1.0.2.4'</span> file=<span class="string">'https://github.com/../releases/download/v2.1/Release.zip'</span>&gt;</span><br><span class="line">&lt;changes&gt;***&lt;/changes&gt;</span><br><span class="line">&lt;/release&gt;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="获取当前程序版本"><a href="#获取当前程序版本" class="headerlink" title="获取当前程序版本"></a>获取当前程序版本</h1><h2 id="Winform"><a href="#Winform" class="headerlink" title="Winform"></a>Winform</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Version version = Assembly.GetExecutingAssembly().GetName().Version;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Netcore"><a href="#Netcore" class="headerlink" title="Netcore"></a>Netcore</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;</span><br></pre></td></tr></table></figure>
+
+<h1 id="获取配置文件内容"><a href="#获取配置文件内容" class="headerlink" title="获取配置文件内容"></a>获取配置文件内容</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Version minimum = Version.Parse(xdoc.Element(<span class="string">"update"</span>).Attribute(<span class="string">"minimum"</span>).Value);</span><br></pre></td></tr></table></figure>
+
+<h1 id="下载更新文件"><a href="#下载更新文件" class="headerlink" title="下载更新文件"></a>下载更新文件</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebClient web = <span class="keyword">new</span> WebClient();</span><br></pre></td></tr></table></figure>
+
+<h2 id="winform"><a href="#winform" class="headerlink" title="winform"></a>winform</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">web.DownloadFileCompleted += Web_DownloadFileCompleted;</span><br><span class="line">web.DownloadFileAsync(<span class="keyword">new</span> Uri(<span class="string">"远程地址"</span>), <span class="string">"目标地址"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Netcore-1"><a href="#Netcore-1" class="headerlink" title="Netcore"></a>Netcore</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">web.DownloadFileCompleted += Web_DownloadFileCompleted;</span><br><span class="line">web.DownloadFile(<span class="keyword">new</span> Uri(<span class="string">"远程地址"</span>), <span class="string">"目标地址"</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZipFile.ExtractToDirectory(download_path, di.Name);</span><br></pre></td></tr></table></figure>
+
+<h1 id="结束当前进程"><a href="#结束当前进程" class="headerlink" title="结束当前进程"></a>结束当前进程</h1><h2 id="Winform-1"><a href="#Winform-1" class="headerlink" title="Winform"></a>Winform</h2><h3 id="重写更新文件"><a href="#重写更新文件" class="headerlink" title="重写更新文件"></a>重写更新文件</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File.WriteAllBytes(<span class="string">"update.bat"</span>, Resources.UpdateBat);</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭进程"><a href="#关闭进程" class="headerlink" title="关闭进程"></a>关闭进程</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Close();</span><br><span class="line"><span class="keyword">if</span> (Program.MainForm != <span class="literal">null</span>) Program.MainForm.Close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Netcore-2"><a href="#Netcore-2" class="headerlink" title="Netcore"></a>Netcore</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process.GetCurrentProcess().Close();</span><br></pre></td></tr></table></figure>
+
+<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process.Start(<span class="string">"update.bat"</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="更新程序模板"><a href="#更新程序模板" class="headerlink" title="更新程序模板"></a>更新程序模板</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">set</span> <span class="string">"taskname=bhp-gui.exe"</span></span><br><span class="line"><span class="built_in">echo</span> waiting...</span><br><span class="line">:<span class="built_in">wait</span></span><br><span class="line">ping 127.0.1 -n 3 &gt;nul</span><br><span class="line">tasklist | find <span class="string">"%taskname%"</span> /i &gt;nul 2&gt;nul</span><br><span class="line"><span class="keyword">if</span> <span class="string">"%errorlevel%"</span> NEQ <span class="string">"1"</span> goto <span class="built_in">wait</span></span><br><span class="line"><span class="built_in">echo</span> updating...</span><br><span class="line">copy /Y update\* *</span><br><span class="line">rmdir /S /Q update</span><br><span class="line">del /F /Q update.zip</span><br><span class="line">start %taskname%</span><br><span class="line">del /F /Q update.bat</span><br></pre></td></tr></table></figure>
+
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="Winform-2"><a href="#Winform-2" class="headerlink" title="Winform"></a>Winform</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;           </span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                xdoc = XDocument.Load(<span class="string">"https://github.com/../releases/download/v10/version.xml"</span>);<span class="comment">//版本配置文件地址</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> &#123; &#125;</span><br><span class="line">            <span class="keyword">if</span> (xdoc != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Version version = Assembly.GetExecutingAssembly().GetName().Version;</span><br><span class="line">                Version minimum = Version.Parse(xdoc.Element(<span class="string">"update"</span>).Attribute(<span class="string">"minimum"</span>).Value);</span><br><span class="line">                <span class="keyword">if</span> (version &lt; minimum)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">using</span> (UpdateDialog dialog = <span class="keyword">new</span> UpdateDialog(xdoc))</span><br><span class="line">                    &#123;</span><br><span class="line">                        dialog.ShowDialog();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;             </span><br><span class="line">            </span><br><span class="line">            Application.Run(MainForm = <span class="keyword">new</span> MainForm(xdoc));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> WebClient web = <span class="keyword">new</span> WebClient();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> <span class="keyword">string</span> download_url;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">string</span> download_path;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">UpdateDialog</span>(<span class="params">XDocument xdoc</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">            Version latest = Version.Parse(xdoc.Element(<span class="string">"update"</span>).Attribute(<span class="string">"latest"</span>).Value);</span><br><span class="line">            XElement release = xdoc.Element(<span class="string">"update"</span>).Elements(<span class="string">"release"</span>).First(p =&gt; p.Attribute(<span class="string">"version"</span>).Value == latest.ToString());</span><br><span class="line">            download_url = release.Attribute(<span class="string">"file"</span>).Value;</span><br><span class="line">            web.DownloadFileCompleted += Web_DownloadFileCompleted;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Web_DownloadFileCompleted</span>(<span class="params"><span class="keyword">object</span> sender, AsyncCompletedEventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.Cancelled || e.Error != <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">            DirectoryInfo di = <span class="keyword">new</span> DirectoryInfo(<span class="string">"update"</span>);</span><br><span class="line">            <span class="keyword">if</span> (di.Exists) di.Delete(<span class="literal">true</span>);</span><br><span class="line">            di.Create();</span><br><span class="line">            ZipFile.ExtractToDirectory(download_path, di.Name);</span><br><span class="line">            FileSystemInfo[] fs = di.GetFileSystemInfos();</span><br><span class="line">            <span class="keyword">if</span> (fs.Length == <span class="number">1</span> &amp;&amp; fs[<span class="number">0</span>] <span class="keyword">is</span> DirectoryInfo)</span><br><span class="line">            &#123;</span><br><span class="line">                ((DirectoryInfo)fs[<span class="number">0</span>]).MoveTo(<span class="string">"update2"</span>);</span><br><span class="line">                di.Delete();</span><br><span class="line">                Directory.Move(<span class="string">"update2"</span>, di.Name);</span><br><span class="line">            &#125;</span><br><span class="line">            File.WriteAllBytes(<span class="string">"update.bat"</span>, Resources.UpdateBat);</span><br><span class="line">            Close();</span><br><span class="line">            <span class="keyword">if</span> (Program.MainForm != <span class="literal">null</span>) Program.MainForm.Close();</span><br><span class="line">            Process.Start(<span class="string">"update.bat"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button2_Click</span>(<span class="params"><span class="keyword">object</span> sender, EventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;           </span><br><span class="line">            download_path = <span class="string">"update.zip"</span>;</span><br><span class="line">            web.DownloadFileAsync(<span class="keyword">new</span> Uri(download_url), download_path);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Netcore-3"><a href="#Netcore-3" class="headerlink" title="Netcore"></a>Netcore</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (UpdateVersion()) <span class="keyword">return</span>;         </span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">UpdateVersion</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            XDocument xdoc = <span class="literal">null</span>;</span><br><span class="line">            WebClient web = <span class="keyword">new</span> WebClient();</span><br><span class="line">            <span class="keyword">string</span> download_url;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                xdoc = XDocument.Load(<span class="string">"https://github.com/../releases/download/v10/version.xml"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> &#123; &#125;</span><br><span class="line">            <span class="keyword">if</span> (xdoc != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;</span><br><span class="line">                Version minimum = Version.Parse(xdoc.Element(<span class="string">"update"</span>).Attribute(<span class="string">"minimum"</span>).Value);</span><br><span class="line">                <span class="keyword">if</span> (version &lt; minimum)</span><br><span class="line">                &#123;</span><br><span class="line">                    Version latest = Version.Parse(xdoc.Element(<span class="string">"update"</span>).Attribute(<span class="string">"latest"</span>).Value);</span><br><span class="line">                    XElement release = xdoc.Element(<span class="string">"update"</span>).Elements(<span class="string">"release"</span>).First(p =&gt; p.Attribute(<span class="string">"version"</span>).Value == latest.ToString());</span><br><span class="line">                    download_url = release.Attribute(<span class="string">"file"</span>).Value;</span><br><span class="line">                    download_path = <span class="string">"Release.zip"</span>;</span><br><span class="line">                    web.DownloadFile(<span class="keyword">new</span> Uri(download_url), download_path);</span><br><span class="line">                    UpdateFiles();</span><br><span class="line"> </span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UpdateFiles</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            DirectoryInfo di = <span class="keyword">new</span> DirectoryInfo(<span class="string">"update"</span>);</span><br><span class="line">            <span class="keyword">if</span> (di.Exists) di.Delete(<span class="literal">true</span>);</span><br><span class="line">            di.Create();</span><br><span class="line">            ZipFile.ExtractToDirectory(download_path, di.Name);</span><br><span class="line">            FileSystemInfo[] fs = di.GetFileSystemInfos();</span><br><span class="line">            <span class="keyword">if</span> (fs.Length == <span class="number">1</span> &amp;&amp; fs[<span class="number">0</span>] <span class="keyword">is</span> DirectoryInfo)</span><br><span class="line">            &#123;</span><br><span class="line">                ((DirectoryInfo)fs[<span class="number">0</span>]).MoveTo(<span class="string">"update2"</span>);</span><br><span class="line">                di.Delete();</span><br><span class="line">                Directory.Move(<span class="string">"update2"</span>, di.Name);</span><br><span class="line">            &#125;</span><br><span class="line">            Process.GetCurrentProcess().Close();</span><br><span class="line">            Process.Start(<span class="string">"update.bat"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/csharp-autoupdate/" data-id="ck2lbqc8x0000n4u69ccyb5vc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-os-win" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/os-win/" class="article-date">
+  <time datetime="2019-11-05T02:07:16.169Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/os-win/">windows常用操作指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h1><ul>
+<li>查看所有端口占用：netstat -ano</li>
+<li>查看指定端口占用：netstat -ano|findstr 7070<br>TCP    0.0.0.0:7070           0.0.0.0:0              LISTENING       77304<br> TCP    [::]:7070              [::]:0                 LISTENING       77304</li>
+<li>查看端口占用程序名：tasklist|findstr 77304<br>javaw.exe                    77304 Console                   10    333,288 K</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/os-win/" data-id="ck2lbqca50001n4u6hs1s8dvf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-os-ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/os-ubuntu/" class="article-date">
+  <time datetime="2019-11-05T02:01:56.743Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/os-ubuntu/">ubuntu常用操作指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="系统操作"><a href="#系统操作" class="headerlink" title="系统操作"></a>系统操作</h1><ul>
+<li>更新系统：apt-get update</li>
+<li>查看系统中文件的使用情况：df -h</li>
+<li>查看当前目录下个文件及目录的使用情况：du -sh *</li>
+<li>磁盘使用情况：df -h<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1></li>
+<li>查看当前文件目录：ls</li>
+<li>进入文件目录：cd</li>
+<li>返回上级文件目录：cd ..</li>
+<li>返回文件根目录：cd</li>
+<li>删除当前目录下的所有文件：rm -f *</li>
+<li>删除文件：rm -rf yourfilename<h1 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h1></li>
+<li>查看已连接的服务端口：netstat -a</li>
+<li>查看所有服务端口：netstat -ap</li>
+<li>查看指定端口：netstat -ap | grep 8080 或 lsof -i:8080</li>
+<li>关闭指定端口程序：kill yourPID号<h1 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h1></li>
+<li>ps</li>
+<li>ps -aux 查看所有进程，每行一个程序</li>
+<li>top 显示当前运行程序</li>
+<li>kill 98 （98为PID号，）</li>
+<li>kill -9 98 （强制杀死98）<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1></li>
+<li>安装git：apt-get install git</li>
+<li>安装curl：apt-get install curl<h1 id="卸载软件"><a href="#卸载软件" class="headerlink" title="卸载软件"></a>卸载软件</h1></li>
+<li>sudo apt-get remove yoursoftname<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1></li>
+<li>curl -O <a href="https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz" target="_blank" rel="noopener">https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz</a><h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1></li>
+<li>tar -C /root/eth -xzf go1.12.6.linux-amd64.tar.gz（PS：路径 “/root/eth” 可以修改为自己的路径）<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1></li>
+<li>配置环境变量<br><code>mkdir -p ~/go; echo &quot;export GOPATH=$HOME/go&quot; &gt;&gt; ~/.bashrc</code>（PS：进入目录）<br><code>echo &quot;export PATH=$PATH:/root/eth/go/bin&quot; &gt;&gt; ~/.bashrc</code>（PS：路径 “:/root/eth/go/bin” 为 ”:/自己的安装目录/go/bin“）<br><code>source ~/.bashrc</code>（PS：立即生效）</li>
+<li>查看环境变量：env</li>
+<li>修改环境变量：vi ~/.bashrc<h1 id="tumx"><a href="#tumx" class="headerlink" title="tumx"></a>tumx</h1></li>
+<li>查看已存在的回话：tmux ls</li>
+<li>新建：tmux new -s yournumber</li>
+<li>进入指定回话：tmux a -t yournumber</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/05/os-ubuntu/" data-id="ck2lbqca80002n4u68ntn9f6j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vue-electron-packager" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/04/vue-electron-packager/" class="article-date">
@@ -446,23 +665,23 @@ vue3.0要求nodejs&gt;=8.9</code></p>
       <ul>
         
           <li>
+            <a href="/2019/11/05/os-win10-remoteerror/">win10远程错误配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/csharp-autoupdate/">C#自动更新程序</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/os-win/">windows常用操作指令</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/os-ubuntu/">ubuntu常用操作指令</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/04/vue-electron-packager/">VUE+ELECTRON打包桌面程序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/04/vue-env-construction/">VUE环境搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/04/git-operation/">GIT常用操作</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/31/github-pages-hexo/">github pages + hexo 搭建个人博客</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/31/hello-world/">Hello World</a>
           </li>
         
       </ul>
