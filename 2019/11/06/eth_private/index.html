@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ETH私链 | Skye Black Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="搭建私链下载安装https:&#x2F;&#x2F;gethstore.blob.core.windows.net&#x2F;builds&#x2F;geth-windows-amd64-1.8.27-4bcc0a37.exe生成两个文件   准备创世区块配置文件genesis.json 1234567891011121314151617&amp;#123;   &quot;config&quot;: &amp;#123;        &quot;chainId&quot;: 22222,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ETH私链">
+<meta property="og:url" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;2019&#x2F;11&#x2F;06&#x2F;eth_private&#x2F;index.html">
+<meta property="og:site_name" content="Skye Black Blog">
+<meta property="og:description" content="搭建私链下载安装https:&#x2F;&#x2F;gethstore.blob.core.windows.net&#x2F;builds&#x2F;geth-windows-amd64-1.8.27-4bcc0a37.exe生成两个文件   准备创世区块配置文件genesis.json 1234567891011121314151617&amp;#123;   &quot;config&quot;: &amp;#123;        &quot;chainId&quot;: 22222,">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_pri_install.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_pri_init.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_pri_path.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_pri_console.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_minerstart.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_sendtrans.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_handletrans.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_contract_compile.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_contract_compile3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_contract_compile5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_contract_compile7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_migrate3.png">
+<meta property="og:updated_time" content="2019-11-06T07:10:50.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;skyeblack.github.io&#x2F;image&#x2F;eth_pri_install.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Skye Black Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Skye Black Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://skyeblack.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-eth_private" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/eth_private/" class="article-date">
+  <time datetime="2019-11-06T07:04:07.067Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ETH私链
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="搭建私链"><a href="#搭建私链" class="headerlink" title="搭建私链"></a>搭建私链</h1><h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.27-4bcc0a37.exe" target="_blank" rel="noopener">https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.27-4bcc0a37.exe</a><br>生成两个文件</p>
+<img src="/image/eth_pri_install.png" class="" title="eth_pri_install">
+
+<h2 id="准备创世区块配置文件"><a href="#准备创世区块配置文件" class="headerlink" title="准备创世区块配置文件"></a>准备创世区块配置文件</h2><p><code>genesis.json</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"config"</span>: &#123;</span><br><span class="line">        <span class="string">"chainId"</span>: 22222,</span><br><span class="line">        <span class="string">"homesteadBlock"</span>: 0,</span><br><span class="line">        <span class="string">"eip155Block"</span>: 0,</span><br><span class="line">        <span class="string">"eip158Block"</span>: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coinbase"</span> : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"difficulty"</span> : <span class="string">"0x01"</span>,</span><br><span class="line">    <span class="string">"extraData"</span> : <span class="string">""</span>,</span><br><span class="line">    <span class="string">"gasLimit"</span> : <span class="string">"0xffffffff"</span>,</span><br><span class="line">    <span class="string">"nonce"</span> : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line">    <span class="string">"mixhash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"timestamp"</span> : <span class="string">"0x00"</span>,</span><br><span class="line">    <span class="string">"alloc"</span>: &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>初始化命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mixhash</td>
+<td>与nonce配合用于挖矿，由上一个区块的一部分生成的hash</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>nonce就是一个64位随机数，用于挖矿</td>
+</tr>
+<tr>
+<td>difficulty</td>
+<td>设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</td>
+</tr>
+<tr>
+<td>alloc</td>
+<td>用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以</td>
+</tr>
+<tr>
+<td>coinbase</td>
+<td>矿工的账号，随便填</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>设置创世块的时间戳</td>
+</tr>
+<tr>
+<td>parentHash</td>
+<td>上一个区块的hash值，因为是创世块，所以这个值是0</td>
+</tr>
+<tr>
+<td>extraData</td>
+<td>附加信息，随便填，可以填你的个性信息</td>
+</tr>
+<tr>
+<td>gasLimit</td>
+<td>该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大</td>
+</tr>
+<tr>
+<td>## 初始化创世区块</td>
+<td></td>
+</tr>
+<tr>
+<td><code>geth --datadir &quot;D:\Tool\ETH\data&quot; init &quot;D:\Tool\ETH\genesis.json&quot; console</code></td>
+<td></td>
+</tr>
+<tr>
+<td>如果在执行上面的命令报错，先删除原来的创世块<code>geth removedb --datadir data</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<img src="/image/eth_pri_init.png" class="" title="eth_pri_init">
+<p>初始化成功后，会在数据目录 data 中生成 geth 和 keystore 两个文件夹，此时目录结构如下：</p>
+<img src="/image/eth_pri_path.png" class="" title="eth_pri_path">
+
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="启动geth"><a href="#启动geth" class="headerlink" title="启动geth"></a>启动geth</h2><p><code>geth --datadir &quot;D:\Tool\ETH\data&quot; console --rpc</code></p>
+<img src="/image/eth_pri_console.png" class="" title="eth_pri_console">
+
+<h2 id="创建账户"><a href="#创建账户" class="headerlink" title="创建账户"></a>创建账户</h2><p><code>personal.newAccount(&#39;Your Password&#39;)</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; personal.newAccount(<span class="string">"1"</span>)</span><br><span class="line"><span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看地址列表"><a href="#查看地址列表" class="headerlink" title="查看地址列表"></a>查看地址列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.accounts</span><br><span class="line">[<span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span>, <span class="string">"0x0dd6f494848afd8cb6e9bb29335edbc341cac7b9"</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="查询账户余额"><a href="#查询账户余额" class="headerlink" title="查询账户余额"></a>查询账户余额</h2><p><code>eth.getBalance(eth.accounts[0])</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.getBalance(eth.accounts[0])</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h2 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a>挖矿</h2><p><code>miner.start()</code></p>
+<img src="/image/eth_minerstart.png" class="" title="eth_minerstart">
+
+<h2 id="停止挖矿"><a href="#停止挖矿" class="headerlink" title="停止挖矿"></a>停止挖矿</h2><p><code>miner.stop()</code></p>
+<h2 id="解锁账户"><a href="#解锁账户" class="headerlink" title="解锁账户"></a>解锁账户</h2><p><code>personal.unlockAccount(eth.accounts[0])</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; personal.unlockAccount(eth.accounts[0])</span><br><span class="line">Unlock account 0x12a97a88c217890aea39918b989b7ae1027295ad</span><br><span class="line">Passphrase:</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="转账"><a href="#转账" class="headerlink" title="转账"></a>转账</h2><p><code>eth.sendTransaction({from:eth.accounts[0], to:eth.accounts[1], value:1000})</code></p>
+<img src="/image/eth_sendtrans.png" class="" title="eth_sendtrans">
+
+<h2 id="查询交易状态"><a href="#查询交易状态" class="headerlink" title="查询交易状态"></a>查询交易状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; txpool.status</span><br><span class="line">&#123;</span><br><span class="line">	pending: 1,</span><br><span class="line">	queued: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中有一条pending的交易，pending表示已提交但还未被处理的交易。</p>
+<h2 id="处理交易"><a href="#处理交易" class="headerlink" title="处理交易"></a>处理交易</h2><p>要使交易被处理，必须要挖矿。这里我们启动挖矿，然后等待挖到一个区块之后就停止挖矿：<br><code>miner.start(1);admin.sleepBlocks(1);miner.stop();</code></p>
+<img src="/image/eth_handletrans.png" class="" title="eth_handletrans %}
+
+&lt;h2 id=获取区块高度" alt="&gt;&lt;a href=#获取区块高度 class=headerlink title=获取区块高度&gt;&lt;&#x2F;a&gt;获取区块高度&lt;&#x2F;h2&gt;&lt;figure class=highlight bash&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=gutter&gt;&lt;pre&gt;&lt;span class=line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class=code&gt;&lt;pre&gt;&lt;span class=line&gt;&gt; eth.blockNumber&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;58&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt; &lt;h2 id=查看区块&gt;&lt;a href=#查看区块 class=headerlink title=查看区块&gt;&lt;&#x2F;a&gt;查看区块&lt;&#x2F;h2&gt;&lt;p&gt;&lt;code&gt;eth.getBlock(57)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt; {% img &#x2F;image&#x2F;eth_getblock.png eth_getblock %}
+
+&lt;h2 id=代币转账">
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abi=[&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newImplementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"upgradeTo"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newImplementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"data"</span>,<span class="string">"type"</span>:<span class="string">"bytes"</span>&#125;],<span class="string">"name"</span>:<span class="string">"upgradeToAndCall"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">true</span>,<span class="string">"stateMutability"</span>:<span class="string">"payable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"implementation"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"changeAdmin"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"admin"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"_implementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"constructor"</span>&#125;,&#123;<span class="string">"payable"</span>:<span class="literal">true</span>,<span class="string">"stateMutability"</span>:<span class="string">"payable"</span>,<span class="string">"type"</span>:<span class="string">"fallback"</span>&#125;,&#123;<span class="string">"anonymous"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"previousAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;,&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"newAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"AdminChanged"</span>,<span class="string">"type"</span>:<span class="string">"event"</span>&#125;,&#123;<span class="string">"anonymous"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"implementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"Upgraded"</span>,<span class="string">"type"</span>:<span class="string">"event"</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=<span class="string">"0x608060405234801561001057600080fd5b5060405160208061080d83398101604081815291517f6f72672e7a657070656c696e6f732e70726f78792e696d706c656d656e74617482527f696f6e00000000000000000000000000000000000000000000000000000000006020830152915190819003602301902081906000805160206107ed8339815191521461009157fe5b6100a381640100000000610104810204565b50604080517f6f72672e7a657070656c696e6f732e70726f78792e61646d696e0000000000008152905190819003601a0190206000805160206107cd833981519152146100ec57fe5b6100fe336401000000006101c2810204565b506101dc565b600061011c826401000000006105ae6101d482021704565b15156101af57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603b60248201527f43616e6e6f742073657420612070726f787920696d706c656d656e746174696f60448201527f6e20746f2061206e6f6e2d636f6e747261637420616464726573730000000000606482015290519081900360840190fd5b506000805160206107ed83398151915255565b6000805160206107cd83398151915255565b6000903b1190565b6105e2806101eb6000396000f30060806040526004361061006c5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416633659cfe681146100765780634f1ef286146100975780635c60da1b146100b75780638f283970146100e8578063f851a44014610109575b61007461011e565b005b34801561008257600080fd5b50610074600160a060020a0360043516610138565b61007460048035600160a060020a03169060248035908101910135610172565b3480156100c357600080fd5b506100cc6101ea565b60408051600160a060020a039092168252519081900360200190f35b3480156100f457600080fd5b50610074600160a060020a0360043516610227565b34801561011557600080fd5b506100cc610339565b610126610364565b610136610131610411565b610436565b565b61014061045a565b600160a060020a031633600160a060020a03161415610167576101628161047f565b61016f565b61016f61011e565b50565b61017a61045a565b600160a060020a031633600160a060020a031614156101dd5761019c8361047f565b30600160a060020a03163483836040518083838082843782019150509250505060006040518083038185875af19250505015156101d857600080fd5b6101e5565b6101e561011e565b505050565b60006101f461045a565b600160a060020a031633600160a060020a0316141561021c57610215610411565b9050610224565b61022461011e565b90565b61022f61045a565b600160a060020a031633600160a060020a0316141561016757600160a060020a03811615156102e557604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603660248201527f43616e6e6f74206368616e6765207468652061646d696e206f6620612070726f60448201527f787920746f20746865207a65726f206164647265737300000000000000000000606482015290519081900360840190fd5b7f7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f61030e61045a565b60408051600160a060020a03928316815291841660208301528051918290030190a1610162816104c7565b600061034361045a565b600160a060020a031633600160a060020a0316141561021c5761021561045a565b61036c61045a565b600160a060020a031633141561040957604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603260248201527f43616e6e6f742063616c6c2066616c6c6261636b2066756e6374696f6e20667260448201527f6f6d207468652070726f78792061646d696e0000000000000000000000000000606482015290519081900360840190fd5b610136610136565b7f7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c35490565b3660008037600080366000845af43d6000803e808015610455573d6000f35b3d6000fd5b7f10d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b5490565b610488816104eb565b60408051600160a060020a038316815290517fbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b9181900360200190a150565b7f10d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b55565b60006104f6826105ae565b151561058957604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603b60248201527f43616e6e6f742073657420612070726f787920696d706c656d656e746174696f60448201527f6e20746f2061206e6f6e2d636f6e747261637420616464726573730000000000606482015290519081900360840190fd5b507f7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c355565b6000903b11905600a165627a7a72305820e6a0e94ea36527366a6a00202c99a28a36e0c44d2d0594a734640045e7169670002910d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c30000000000000000000000006ffcb0f00c3ad2575e443152d8861aec1bda9ce6"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">myContract=eth.contract(abi)</span><br><span class="line"></span><br><span class="line">personal.unlockAccount(eth.accounts[0])</span><br><span class="line"></span><br><span class="line">contract=myContract.new(&#123;from:eth.accounts[0],data:code,gas:1000000&#125;)</span><br><span class="line"></span><br><span class="line">&gt; contract</span><br><span class="line">&#123;</span><br><span class="line">  abi: [&#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"upgradeTo"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;, &#123;...&#125;],</span><br><span class="line">      name: <span class="string">"upgradeToAndCall"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">true</span>,</span><br><span class="line">      stateMutability: <span class="string">"payable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">true</span>,</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: <span class="string">"implementation"</span>,</span><br><span class="line">      outputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"view"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"changeAdmin"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">true</span>,</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: <span class="string">"admin"</span>,</span><br><span class="line">      outputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"view"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"constructor"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      payable: <span class="literal">true</span>,</span><br><span class="line">      stateMutability: <span class="string">"payable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"fallback"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      anonymous: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;, &#123;...&#125;],</span><br><span class="line">      name: <span class="string">"AdminChanged"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"event"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      anonymous: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"Upgraded"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"event"</span></span><br><span class="line">  &#125;],</span><br><span class="line">  address: undefined,</span><br><span class="line">  transactionHash: <span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span></span><br><span class="line">&#125;</span><br><span class="line">查交易：</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>, </span><br><span class="line">	<span class="string">"id"</span>:1, </span><br><span class="line">	<span class="string">"method"</span>: <span class="string">"eth_getTransactionReceipt"</span>, </span><br><span class="line">	<span class="string">"params"</span>: [<span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span>] </span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>,</span><br><span class="line">    <span class="string">"id"</span>: 1,</span><br><span class="line">    <span class="string">"result"</span>: &#123;</span><br><span class="line">        <span class="string">"blockHash"</span>: <span class="string">"0x9de2bcfaa9c24789470746f4f4f50404695142cf1c207757b941edbebd3f19c3"</span>,</span><br><span class="line">        <span class="string">"blockNumber"</span>: <span class="string">"0x55d"</span>,</span><br><span class="line">        <span class="string">"contractAddress"</span>: <span class="string">"0xc5c2f2302562498c5d94dc50fd9d4aaaa97a9932"</span>,</span><br><span class="line">        <span class="string">"cumulativeGasUsed"</span>: <span class="string">"0xf4240"</span>,</span><br><span class="line">        <span class="string">"from"</span>: <span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span>,</span><br><span class="line">        <span class="string">"gasUsed"</span>: <span class="string">"0xf4240"</span>,</span><br><span class="line">        <span class="string">"logs"</span>: [],</span><br><span class="line">        <span class="string">"logsBloom"</span>: <span class="string">"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">        <span class="string">"root"</span>: <span class="string">"0x809324d522480ba4ce3aa54b10465255e4919294b81a5605c3c2023e2f87de8e"</span>,</span><br><span class="line">        <span class="string">"to"</span>: null,</span><br><span class="line">        <span class="string">"transactionHash"</span>: <span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span>,</span><br><span class="line">        <span class="string">"transactionIndex"</span>: <span class="string">"0x0"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无法调用合约时：contract = web3.eth.contract(abi).at(“0xc5c2f2302562498c5d94dc50fd9d4aaaa97a9932”)<br>contract.方法名称()</p>
+<h1 id="编译合约（以PAX为例）"><a href="#编译合约（以PAX为例）" class="headerlink" title="编译合约（以PAX为例）"></a>编译合约（以PAX为例）</h1><h2 id="下载合约源码"><a href="#下载合约源码" class="headerlink" title="下载合约源码"></a>下载合约源码</h2><p><a href="https://github.com/paxosglobal/pax-contracts" target="_blank" rel="noopener">https://github.com/paxosglobal/pax-contracts</a></p>
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><h3 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h3><p>下载：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>查看版本：node -v</p>
+<h3 id="truffle"><a href="#truffle" class="headerlink" title="truffle"></a>truffle</h3><p><code>npm install -g truffle</code><br><code>npm install truffle-hdwallet-provider</code></p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>将truffle.js重命名为truffle-config.js<h3 id="truffle-compile"><a href="#truffle-compile" class="headerlink" title="truffle compile"></a>truffle compile</h3>出现如下报错<img src="/image/eth_contract_compile.png" class="" title="eth_contract_compile %}
+将D:ToolETHpax-contracts-mastercontracts下的所有sol文件的pragma solidity ^0.4.28修改为pragma solidity &gt;=0.4.21 &lt;0.6.0;&lt;br&gt;出现如下报错&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+{% img &#x2F;image&#x2F;eth_contract_compile2.png eth_contract_compile2">
+
+<p>将D:\Tool\ETH\pax-contracts-master\contracts下的所有sol文件的pragma experimental “v0.5.0”注释<br>删除文件AdminUpgradeabilityProxy.sol及相关内容</p>
+<img src="/image/eth_contract_compile3.png" class="" title="eth_contract_compile3 %}
+
+{% img &#x2F;image&#x2F;eth_contract_compile4.png eth_contract_compile4">
+
+<img src="/image/eth_contract_compile5.png" class="" title="eth_contract_compile5 %}
+
+{% img &#x2F;image&#x2F;eth_contract_compile6.png eth_contract_compile6">
+
+<img src="/image/eth_contract_compile7.png" class="" title="eth_contract_compile7 %}
+
+
+&lt;h2 id=部署" alt="&gt;&lt;a href=#部署 class=headerlink title=部署&gt;&lt;&#x2F;a&gt;部署&lt;&#x2F;h2&gt;&lt;p&gt;启动geth需要开启rpc，需要挖矿，需要解锁账户。&lt;&#x2F;p&gt; {% img &#x2F;image&#x2F;eth_migrate.png eth_migrate %}
+&lt;p&gt;部署truffle migrate，执行命令后，会输出“Deploying Migrations…”，表示正在进行部署。&lt;&#x2F;p&gt;
+{% img &#x2F;image&#x2F;eth_migrate2.png eth_migrate2">
+
+<p>查看合约地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>, </span><br><span class="line">	<span class="string">"id"</span>:1, </span><br><span class="line">	<span class="string">"method"</span>: <span class="string">"eth_getTransactionReceipt"</span>, </span><br><span class="line">	<span class="string">"params"</span>: [<span class="string">"0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321"</span>] </span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>,</span><br><span class="line">    <span class="string">"id"</span>: 1,</span><br><span class="line">    <span class="string">"result"</span>: &#123;</span><br><span class="line">        <span class="string">"blockHash"</span>: <span class="string">"0x8b54f351e61ed4343245c026e667fef9ec4bcc5176b5939d9ed5defd2f53f6fa"</span>,</span><br><span class="line">        <span class="string">"blockNumber"</span>: <span class="string">"0x8f"</span>,</span><br><span class="line">        <span class="string">"contractAddress"</span>: <span class="string">"0xc93a31c34c9517b8eb24173c9448a94a4f94c22f"</span>,</span><br><span class="line">        <span class="string">"cumulativeGasUsed"</span>: <span class="string">"0x44872"</span>,</span><br><span class="line">        <span class="string">"from"</span>: <span class="string">"0xbf584dd2094c0807d5fab99c77c6b9cc7423ef14"</span>,</span><br><span class="line">        <span class="string">"gasUsed"</span>: <span class="string">"0x22439"</span>,</span><br><span class="line">        <span class="string">"logs"</span>: [],</span><br><span class="line">        <span class="string">"logsBloom"</span>: <span class="string">"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">        <span class="string">"root"</span>: <span class="string">"0x706ea99b03604cad4b0ebe9b1fc9aec4bfede7b8ba3f826e9baf77c4cf70f854"</span>,</span><br><span class="line">        <span class="string">"to"</span>: null,</span><br><span class="line">        <span class="string">"transactionHash"</span>: <span class="string">"0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321"</span>,</span><br><span class="line">        <span class="string">"transactionIndex"</span>: <span class="string">"0x1"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/image/eth_migrate3.png" class="" title="eth_migrate3 %}
+
+&lt;figure class=highlight bash" alt="&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=gutter&gt;&lt;pre&gt;&lt;span class=line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;5&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;6&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;7&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;8&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;9&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;10&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;11&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;12&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;13&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class=code&gt;&lt;pre&gt;&lt;span class=line&gt;Deploying &lt;span class=string&gt;Migrations&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; ----------------------&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; block number: 145&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; block timestamp: 1562742148&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; account: 0xbF584dd2094c0807d5FAb99c77c6b9cC7423Ef14&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; balance: 714.999999999999858655&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; gas used: 140345&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; gas price: 0.000000001 gwei&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; value sent: 0 ETH&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; total cost: 0.000000000000140345 ETH&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; -------------------------------------&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; Total cost: 0.000000000000140345">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/06/eth_private/" data-id="ck2mzi5m50002e4u68agjbn8j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/06/eth_keythereum/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          keythereum使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/05/vue-npm-plugin/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">npm插件开发(基于vue-cli3.x)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/06/eth_cmd/">ETH节点命令</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/eth_keythereum/">keythereum使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/eth_private/">ETH私链</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-npm-plugin/">npm插件开发(基于vue-cli3.x)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/05/vue-html-component/">在纯html页引入组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Skye Black<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

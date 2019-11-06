@@ -61,6 +61,388 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-eth_cmd" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/eth_cmd/" class="article-date">
+  <time datetime="2019-11-06T07:47:52.228Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/eth_cmd/">ETH节点命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ETH-Config"><a href="#ETH-Config" class="headerlink" title="ETH Config"></a>ETH Config</h1><h2 id="geth节点启动命令"><a href="#geth节点启动命令" class="headerlink" title="geth节点启动命令"></a>geth节点启动命令</h2><p>进入启动程序目录：<code>/本地源码目录/go-ethereum/build/bin</code></p>
+<h2 id="启动节点命令"><a href="#启动节点命令" class="headerlink" title="启动节点命令"></a>启动节点命令</h2><h3 id="主网"><a href="#主网" class="headerlink" title="主网"></a>主网</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./geth --identity <span class="string">"eth"</span> --datadir <span class="string">"/本地源码目录/data"</span>  --rpc --rpcapi <span class="string">"db,net,web3,eth,personal,miner"</span> --rpccorsdomain <span class="string">"*"</span>  --rpcaddr 0.0.0.0 --rpcport 8545 --networkid 1 console 2&gt;&gt; eth.log</span><br></pre></td></tr></table></figure>
+<h3 id="测试网"><a href="#测试网" class="headerlink" title="测试网"></a>测试网</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./geth --testnet --datadir <span class="string">"/本地源码目录/testdata"</span>  --rpc --rpcapi <span class="string">"db,net,web3,eth,personal,miner"</span> --rpccorsdomain <span class="string">"*"</span>  --rpcaddr 0.0.0.0 --rpcport 8545 --networkid 3 console 2&gt;&gt; eth.log</span><br></pre></td></tr></table></figure>
+<p><code>--testnet表示选择的是ropsten测试网络，如果想要同步rinkeby测试网络，可以更换参数--testnet为--rinkeby</code></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>identity</td>
+<td>区块链的标示，用于标示目前网络的名字</td>
+</tr>
+<tr>
+<td>nodiscover</td>
+<td>私有链地址，不会被网上看到</td>
+</tr>
+<tr>
+<td>datadir</td>
+<td>设置当前区块链网络数据存放的位置</td>
+</tr>
+<tr>
+<td>rpc</td>
+<td>开启rpc通道</td>
+</tr>
+<tr>
+<td>rpcapi</td>
+<td>要开放哪些rpc api，默认eth,net,web3</td>
+</tr>
+<tr>
+<td>rpccorsdomain</td>
+<td>允许能连接到你的节点执行rpc api的url，使用逗号分隔。*表示任何url都可以连接</td>
+</tr>
+<tr>
+<td>rpcaddr</td>
+<td>HTTP-RPC服务器接口地址，默认为localhost</td>
+</tr>
+<tr>
+<td>rpcport</td>
+<td>HTTP-RPC服务器端口地址，默认为8545</td>
+</tr>
+<tr>
+<td>networkid</td>
+<td>网络标识，私有链取一个大于4的随意的值</td>
+</tr>
+<tr>
+<td>console</td>
+<td>启动命令行模式，可以在Geth中执行命令</td>
+</tr>
+<tr>
+<td>verbosity</td>
+<td>日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail(default: 3)<br/>2&gt;&gt; eth.log 表示把控制台日志输出到eth.log文件。新开一个命令行终端，运行tail -f geth.log命令来实时显示日志，这样日志信息就不会出现在终端中，让你在终端运行命令的时候可读性较差</td>
+</tr>
+</tbody></table>
+<p><code>Geth uses port 30303 for connections to peers.</code></p>
+<h2 id="以太坊常用networkid"><a href="#以太坊常用networkid" class="headerlink" title="以太坊常用networkid"></a>以太坊常用networkid</h2><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>NAME</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>main network</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ropsten</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Rinkeby</td>
+</tr>
+<tr>
+<td>42</td>
+<td>Kovan</td>
+</tr>
+<tr>
+<td>其它数字为个人自定义私有网络</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>0: Olympic, Ethereum public pre-release PoW testnet<br>1: Frontier, Homestead, Metropolis, the Ethereum public PoW main network<br>1: Classic, the (un)forked public Ethereum Classic PoW main network, chain ID 61<br>1: Expanse, an alternative Ethereum implementation, chain ID 2<br>2: Morden Classic, the public Ethereum Classic PoW testnet(deprecated)<br>3: Ropsten, the public cross-client Ethereum PoW testnet<br>4: Rinkeby, the public Geth-only PoA testnet<br>5: Goerli, the public cross-client PoA testnet<br>6: Kotti Classic, the public cross-client PoA testnet for Classic<br>8: Ubiq, the public Gubiq main network with flux difficulty chain ID 8<br>42: Kovan, the public Parity-only PoA testnet<br>60: GoChain, the GoChain networks mainnet<br>77: Sokol, the public POA Network testnet<br>99: Core, the public POA Network main network<br>100: xDai, the public MakerDAO/POA Network main network<br>31337: GoChain testnet, the GoChain networks public testnet<br>401697: Tobalaba, the public Energy Web Foundation testnet<br>7762959: Musicoin, the music blockchain<br>61717561: Aquachain, ASIC resistant chain<br>[Other]: Could indicate that your connected to a local development test network.</p>
+<h2 id="进入控制台"><a href="#进入控制台" class="headerlink" title="进入控制台"></a>进入控制台</h2><p><code>./geth attach ipc:/本地数据目录/geth.ipc</code></p>
+<h2 id="erc20-智能合约各方法对应的签名编码"><a href="#erc20-智能合约各方法对应的签名编码" class="headerlink" title="erc20 智能合约各方法对应的签名编码"></a>erc20 智能合约各方法对应的签名编码</h2><ul>
+<li>常见例如：transfer(address,uint256)<br>编码为：web3.sha3(“transfer(address,uint256)”).substring(0,10)  -&gt; “0xa9059cbb”</li>
+<li>balanceOf(address)<br>编码为：web3.sha3(“balanceOf(address)”).substring(0,10)  -&gt; “0x70a08231”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>transfer(address,uint256)</td>
+<td>0xa9059cbb</td>
+</tr>
+<tr>
+<td>balanceOf(address)</td>
+<td>0x70a08231</td>
+</tr>
+<tr>
+<td>decimals()</td>
+<td>0x313ce567</td>
+</tr>
+<tr>
+<td>allowance(address,address)</td>
+<td>0xdd62ed3e</td>
+</tr>
+<tr>
+<td>symbol()</td>
+<td>0x95d89b41</td>
+</tr>
+<tr>
+<td>totalSupply()</td>
+<td>0x18160ddd</td>
+</tr>
+<tr>
+<td>name()</td>
+<td>0x06fdde03</td>
+</tr>
+<tr>
+<td>approve(address,uint256)</td>
+<td>0x095ea7b3</td>
+</tr>
+<tr>
+<td>transferFrom(address,address,uint256)</td>
+<td>0x23b872dd</td>
+</tr>
+</tbody></table>
+<h2 id="erc20-交易"><a href="#erc20-交易" class="headerlink" title="erc20 交易"></a>erc20 交易</h2><p>传输数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function: transfer(address _to, uint256 _value)</span><br><span class="line"></span><br><span class="line">0xa9059cbb0000000000000000000000000797350000000000000000000000000000000000000000000005150ac4c39a6f3f0000</span><br></pre></td></tr></table></figure>
+
+<p>将数据分解为适当的块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0x                                                     // Hex prefix</span><br><span class="line">a9059cbb                                               // web3.sha3(<span class="string">"transfer(address,uint256)"</span>).substring(0,10) =&gt; <span class="string">"0xa9059cbb"</span></span><br><span class="line">0000000000000000000000000797350000000000               // address - 40 characters</span><br><span class="line">000000000000000000000000000000000005150ac4c39a6f3f0000 // value - 54 characters - should be 64 characters</span><br><span class="line"> </span><br><span class="line">// Ruler below </span><br><span class="line">1234567890123456789012345678901234567890123456789012345678901234</span><br></pre></td></tr></table></figure>
+
+<p>值字段将用零填充以组成64个字符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Intended transfer amount</span><br><span class="line">// new BigNumber(<span class="string">"5150ac4c39a6f3f0000"</span>,16).div(1e18)</span><br><span class="line">// 23999.99</span><br><span class="line">000000000000000000000000000000000005150ac4c39a6f3f0000</span><br><span class="line"> </span><br><span class="line">// Actual transfer instruction</span><br><span class="line">// new BigNumber(<span class="string">"5150ac4c39a6f3f00000000000000"</span>,16).div(1e18)</span><br><span class="line">26388268071507722.24</span><br><span class="line">000000000000000000000000000000000005150ac4c39a6f3f00000000000000</span><br><span class="line"> </span><br><span class="line">// Ruler below </span><br><span class="line">1234567890123456789012345678901234567890123456789012345678901234</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/06/eth_cmd/" data-id="ck2mzi5kt0000e4u6b9tc21l2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-eth_keythereum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/eth_keythereum/" class="article-date">
+  <time datetime="2019-11-06T07:47:50.914Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/eth_keythereum/">keythereum使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="新建yourfilename-js文件"><a href="#新建yourfilename-js文件" class="headerlink" title="新建yourfilename.js文件"></a>新建yourfilename.js文件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">'express'</span>);//引入express</span><br><span class="line">var app = express();//注册成app(这里我们也可以应用路由中间件 var router =express.Router(),接着在写接口时,将app替换为router)</span><br><span class="line">var bodyParser = require(<span class="string">'body-parser'</span>); //引入插件包，解决post请求参数问题</span><br><span class="line">app.use(bodyParser.json());//接收json</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;</span><br><span class="line">    extended: <span class="literal">true</span></span><br><span class="line">&#125;));</span><br><span class="line">var keythereum = require(<span class="string">"keythereum"</span>);//引入eth私钥插件</span><br><span class="line">var md5 = require(<span class="string">"nodejs-md5"</span>);//引入md5加密 </span><br><span class="line">var fs = require(<span class="string">'fs'</span>); //文件模块</span><br><span class="line">//设置跨域访问</span><br><span class="line">app.all(<span class="string">'*'</span>, <span class="keyword">function</span> (req, res, next) &#123;   //设置全局的全域问题，我这里是把所有的全部允许了，如果不怕麻烦或者业务需求，你也可以在请求里面写对应的跨域问题</span><br><span class="line">    res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">    res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"X-Requested-With"</span>);</span><br><span class="line">    res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</span><br><span class="line">    res.header(<span class="string">"X-Powered-By"</span>, <span class="string">' 3.2.1'</span>);</span><br><span class="line">    res.header(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var datadir;//data存放的地址路径</span><br><span class="line">var key;</span><br><span class="line">console.log(<span class="string">"start"</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./config.json'</span>, <span class="string">'utf-8'</span>, <span class="keyword">function</span>(err, data) &#123;</span><br><span class="line">	<span class="keyword">if</span> (err) &#123;</span><br><span class="line">		console.log(<span class="string">'config error'</span>);		</span><br><span class="line">		process.exit();</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		var jdata = JSON.parse(data)</span><br><span class="line">		datadir = jdata.datadir;</span><br><span class="line">		keydir = jdata.keydir;</span><br><span class="line">		key = jdata.key;</span><br><span class="line">		//配置服务端口</span><br><span class="line">		app.listen(jdata.port) //监听服务端口</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">	</span><br><span class="line">//根据eth地址获取私钥</span><br><span class="line">//地址请求用res.query获取值，json请求用res.body获取值</span><br><span class="line">app.post(<span class="string">'/getprikey'</span>,<span class="keyword">function</span> (req, res) &#123;</span><br><span class="line">	try&#123;	</span><br><span class="line">		var address = req.body.address;</span><br><span class="line">		var sign = req.body.sign;</span><br><span class="line">		var signstr = address;</span><br><span class="line">		var isSign = <span class="literal">false</span>;</span><br><span class="line">		md5.string.quiet(signstr, <span class="keyword">function</span> (err, md5) &#123;</span><br><span class="line">			<span class="keyword">if</span> (err) &#123;</span><br><span class="line">				console.log(err);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				md5 = md5.toUpperCase();</span><br><span class="line">				<span class="keyword">if</span>(sign == md5) </span><br><span class="line">				&#123;</span><br><span class="line">					isSign = <span class="literal">true</span>;			</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					console.log(<span class="string">"signstr="</span> + signstr);</span><br><span class="line">					console.log(<span class="string">"sign="</span> + sign);</span><br><span class="line">					console.log(<span class="string">"md5="</span> + md5);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">if</span>(!isSign)&#123;</span><br><span class="line">			res.json(&#123;error:<span class="string">"sign error"</span>&#125;);</span><br><span class="line">			<span class="built_in">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">				</span><br><span class="line">		var keyObject = keythereum.importFromFile(address, datadir);  </span><br><span class="line">		var privateKey = keythereum.recover(password, keyObject);  </span><br><span class="line"></span><br><span class="line">		res.json(&#123;address:address,prikey:privateKey.toString(<span class="string">'hex'</span>)&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	catch(e)&#123;</span><br><span class="line">		console.log(e);</span><br><span class="line">		res.json(&#123;error:<span class="string">"error"</span>&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);		</span><br><span class="line"></span><br><span class="line">//创建eth地址</span><br><span class="line">app.post(<span class="string">'/createAddress'</span>,<span class="keyword">function</span> (req, res) &#123;</span><br><span class="line">	try&#123;</span><br><span class="line">		var password = req.body.password;</span><br><span class="line">		var sign = req.body.sign;</span><br><span class="line">		var signstr = password ;</span><br><span class="line">		var isSign = <span class="literal">false</span>;</span><br><span class="line">		md5.string.quiet(signstr, <span class="keyword">function</span> (err, md5) &#123;</span><br><span class="line">			<span class="keyword">if</span> (err) &#123;</span><br><span class="line">				console.log(err);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				md5 = md5.toUpperCase();</span><br><span class="line">				<span class="keyword">if</span>(sign == md5) </span><br><span class="line">				&#123;</span><br><span class="line">					isSign = <span class="literal">true</span>;			</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					console.log(<span class="string">"signstr="</span> + signstr);</span><br><span class="line">					console.log(<span class="string">"sign="</span> + sign);</span><br><span class="line">					console.log(<span class="string">"md5="</span> + md5);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">if</span>(!isSign)&#123;</span><br><span class="line">			res.json(&#123;error:<span class="string">"sign error"</span>&#125;);</span><br><span class="line">			<span class="built_in">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		var dk = keythereum.create();</span><br><span class="line">		var keyObject = keythereum.dump(password, dk.privateKey, dk.salt, dk.iv);		</span><br><span class="line">		keythereum.exportToFile(keyObject,datadir + <span class="string">"keystore/"</span>);</span><br><span class="line">		res.json(&#123;address:<span class="string">"0x"</span>+keyObject.address,prikey:dk.privateKey.toString(<span class="string">'hex'</span>)&#125;);		</span><br><span class="line">	&#125;</span><br><span class="line">	catch(e)&#123;</span><br><span class="line">		console.log(e);</span><br><span class="line">		res.json(&#123;error:<span class="string">"error"</span>&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="配置文件config-js"><a href="#配置文件config-js" class="headerlink" title="配置文件config.js"></a>配置文件config.js</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"datadir"</span>:<span class="string">"D:/Tool/ETH/v1.9.2/testdata/"</span>,</span><br><span class="line">	<span class="string">"port"</span>:xxxx,</span><br><span class="line">	<span class="string">"key"</span>:<span class="string">"xxxxxxx"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>需要node环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install express</span><br><span class="line">npm install body-parser</span><br><span class="line">npm install express-xml-bodyparser</span><br><span class="line">npm install keythereum</span><br><span class="line">npm install nodejs-md5</span><br></pre></td></tr></table></figure>
+
+<h1 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h1><p><code>node yourfilename.js</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/06/eth_keythereum/" data-id="ck2mzi5m20001e4u698io1ypr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-eth_private" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/06/eth_private/" class="article-date">
+  <time datetime="2019-11-06T07:04:07.067Z" itemprop="datePublished">2019-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/eth_private/">ETH私链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="搭建私链"><a href="#搭建私链" class="headerlink" title="搭建私链"></a>搭建私链</h1><h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.27-4bcc0a37.exe" target="_blank" rel="noopener">https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.27-4bcc0a37.exe</a><br>生成两个文件</p>
+<img src="/image/eth_pri_install.png" class="" title="eth_pri_install">
+
+<h2 id="准备创世区块配置文件"><a href="#准备创世区块配置文件" class="headerlink" title="准备创世区块配置文件"></a>准备创世区块配置文件</h2><p><code>genesis.json</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"config"</span>: &#123;</span><br><span class="line">        <span class="string">"chainId"</span>: 22222,</span><br><span class="line">        <span class="string">"homesteadBlock"</span>: 0,</span><br><span class="line">        <span class="string">"eip155Block"</span>: 0,</span><br><span class="line">        <span class="string">"eip158Block"</span>: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coinbase"</span> : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"difficulty"</span> : <span class="string">"0x01"</span>,</span><br><span class="line">    <span class="string">"extraData"</span> : <span class="string">""</span>,</span><br><span class="line">    <span class="string">"gasLimit"</span> : <span class="string">"0xffffffff"</span>,</span><br><span class="line">    <span class="string">"nonce"</span> : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line">    <span class="string">"mixhash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="string">"timestamp"</span> : <span class="string">"0x00"</span>,</span><br><span class="line">    <span class="string">"alloc"</span>: &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>初始化命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mixhash</td>
+<td>与nonce配合用于挖矿，由上一个区块的一部分生成的hash</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>nonce就是一个64位随机数，用于挖矿</td>
+</tr>
+<tr>
+<td>difficulty</td>
+<td>设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</td>
+</tr>
+<tr>
+<td>alloc</td>
+<td>用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以</td>
+</tr>
+<tr>
+<td>coinbase</td>
+<td>矿工的账号，随便填</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>设置创世块的时间戳</td>
+</tr>
+<tr>
+<td>parentHash</td>
+<td>上一个区块的hash值，因为是创世块，所以这个值是0</td>
+</tr>
+<tr>
+<td>extraData</td>
+<td>附加信息，随便填，可以填你的个性信息</td>
+</tr>
+<tr>
+<td>gasLimit</td>
+<td>该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大</td>
+</tr>
+<tr>
+<td>## 初始化创世区块</td>
+<td></td>
+</tr>
+<tr>
+<td><code>geth --datadir &quot;D:\Tool\ETH\data&quot; init &quot;D:\Tool\ETH\genesis.json&quot; console</code></td>
+<td></td>
+</tr>
+<tr>
+<td>如果在执行上面的命令报错，先删除原来的创世块<code>geth removedb --datadir data</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<img src="/image/eth_pri_init.png" class="" title="eth_pri_init">
+<p>初始化成功后，会在数据目录 data 中生成 geth 和 keystore 两个文件夹，此时目录结构如下：</p>
+<img src="/image/eth_pri_path.png" class="" title="eth_pri_path">
+
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="启动geth"><a href="#启动geth" class="headerlink" title="启动geth"></a>启动geth</h2><p><code>geth --datadir &quot;D:\Tool\ETH\data&quot; console --rpc</code></p>
+<img src="/image/eth_pri_console.png" class="" title="eth_pri_console">
+
+<h2 id="创建账户"><a href="#创建账户" class="headerlink" title="创建账户"></a>创建账户</h2><p><code>personal.newAccount(&#39;Your Password&#39;)</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; personal.newAccount(<span class="string">"1"</span>)</span><br><span class="line"><span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看地址列表"><a href="#查看地址列表" class="headerlink" title="查看地址列表"></a>查看地址列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.accounts</span><br><span class="line">[<span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span>, <span class="string">"0x0dd6f494848afd8cb6e9bb29335edbc341cac7b9"</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="查询账户余额"><a href="#查询账户余额" class="headerlink" title="查询账户余额"></a>查询账户余额</h2><p><code>eth.getBalance(eth.accounts[0])</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.getBalance(eth.accounts[0])</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h2 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a>挖矿</h2><p><code>miner.start()</code></p>
+<img src="/image/eth_minerstart.png" class="" title="eth_minerstart">
+
+<h2 id="停止挖矿"><a href="#停止挖矿" class="headerlink" title="停止挖矿"></a>停止挖矿</h2><p><code>miner.stop()</code></p>
+<h2 id="解锁账户"><a href="#解锁账户" class="headerlink" title="解锁账户"></a>解锁账户</h2><p><code>personal.unlockAccount(eth.accounts[0])</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; personal.unlockAccount(eth.accounts[0])</span><br><span class="line">Unlock account 0x12a97a88c217890aea39918b989b7ae1027295ad</span><br><span class="line">Passphrase:</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="转账"><a href="#转账" class="headerlink" title="转账"></a>转账</h2><p><code>eth.sendTransaction({from:eth.accounts[0], to:eth.accounts[1], value:1000})</code></p>
+<img src="/image/eth_sendtrans.png" class="" title="eth_sendtrans">
+
+<h2 id="查询交易状态"><a href="#查询交易状态" class="headerlink" title="查询交易状态"></a>查询交易状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; txpool.status</span><br><span class="line">&#123;</span><br><span class="line">	pending: 1,</span><br><span class="line">	queued: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中有一条pending的交易，pending表示已提交但还未被处理的交易。</p>
+<h2 id="处理交易"><a href="#处理交易" class="headerlink" title="处理交易"></a>处理交易</h2><p>要使交易被处理，必须要挖矿。这里我们启动挖矿，然后等待挖到一个区块之后就停止挖矿：<br><code>miner.start(1);admin.sleepBlocks(1);miner.stop();</code></p>
+<img src="/image/eth_handletrans.png" class="" title="eth_handletrans %}
+
+&lt;h2 id=获取区块高度" alt="&gt;&lt;a href=#获取区块高度 class=headerlink title=获取区块高度&gt;&lt;&#x2F;a&gt;获取区块高度&lt;&#x2F;h2&gt;&lt;figure class=highlight bash&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=gutter&gt;&lt;pre&gt;&lt;span class=line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class=code&gt;&lt;pre&gt;&lt;span class=line&gt;&gt; eth.blockNumber&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;58&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt; &lt;h2 id=查看区块&gt;&lt;a href=#查看区块 class=headerlink title=查看区块&gt;&lt;&#x2F;a&gt;查看区块&lt;&#x2F;h2&gt;&lt;p&gt;&lt;code&gt;eth.getBlock(57)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt; {% img &#x2F;image&#x2F;eth_getblock.png eth_getblock %}
+
+&lt;h2 id=代币转账">
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abi=[&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newImplementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"upgradeTo"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newImplementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"data"</span>,<span class="string">"type"</span>:<span class="string">"bytes"</span>&#125;],<span class="string">"name"</span>:<span class="string">"upgradeToAndCall"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">true</span>,<span class="string">"stateMutability"</span>:<span class="string">"payable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"implementation"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"newAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"changeAdmin"</span>,<span class="string">"outputs"</span>:[],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"admin"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"_implementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"constructor"</span>&#125;,&#123;<span class="string">"payable"</span>:<span class="literal">true</span>,<span class="string">"stateMutability"</span>:<span class="string">"payable"</span>,<span class="string">"type"</span>:<span class="string">"fallback"</span>&#125;,&#123;<span class="string">"anonymous"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"previousAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;,&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"newAdmin"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"AdminChanged"</span>,<span class="string">"type"</span>:<span class="string">"event"</span>&#125;,&#123;<span class="string">"anonymous"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"indexed"</span>:<span class="literal">false</span>,<span class="string">"name"</span>:<span class="string">"implementation"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"Upgraded"</span>,<span class="string">"type"</span>:<span class="string">"event"</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=<span class="string">"0x608060405234801561001057600080fd5b5060405160208061080d83398101604081815291517f6f72672e7a657070656c696e6f732e70726f78792e696d706c656d656e74617482527f696f6e00000000000000000000000000000000000000000000000000000000006020830152915190819003602301902081906000805160206107ed8339815191521461009157fe5b6100a381640100000000610104810204565b50604080517f6f72672e7a657070656c696e6f732e70726f78792e61646d696e0000000000008152905190819003601a0190206000805160206107cd833981519152146100ec57fe5b6100fe336401000000006101c2810204565b506101dc565b600061011c826401000000006105ae6101d482021704565b15156101af57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603b60248201527f43616e6e6f742073657420612070726f787920696d706c656d656e746174696f60448201527f6e20746f2061206e6f6e2d636f6e747261637420616464726573730000000000606482015290519081900360840190fd5b506000805160206107ed83398151915255565b6000805160206107cd83398151915255565b6000903b1190565b6105e2806101eb6000396000f30060806040526004361061006c5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416633659cfe681146100765780634f1ef286146100975780635c60da1b146100b75780638f283970146100e8578063f851a44014610109575b61007461011e565b005b34801561008257600080fd5b50610074600160a060020a0360043516610138565b61007460048035600160a060020a03169060248035908101910135610172565b3480156100c357600080fd5b506100cc6101ea565b60408051600160a060020a039092168252519081900360200190f35b3480156100f457600080fd5b50610074600160a060020a0360043516610227565b34801561011557600080fd5b506100cc610339565b610126610364565b610136610131610411565b610436565b565b61014061045a565b600160a060020a031633600160a060020a03161415610167576101628161047f565b61016f565b61016f61011e565b50565b61017a61045a565b600160a060020a031633600160a060020a031614156101dd5761019c8361047f565b30600160a060020a03163483836040518083838082843782019150509250505060006040518083038185875af19250505015156101d857600080fd5b6101e5565b6101e561011e565b505050565b60006101f461045a565b600160a060020a031633600160a060020a0316141561021c57610215610411565b9050610224565b61022461011e565b90565b61022f61045a565b600160a060020a031633600160a060020a0316141561016757600160a060020a03811615156102e557604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603660248201527f43616e6e6f74206368616e6765207468652061646d696e206f6620612070726f60448201527f787920746f20746865207a65726f206164647265737300000000000000000000606482015290519081900360840190fd5b7f7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f61030e61045a565b60408051600160a060020a03928316815291841660208301528051918290030190a1610162816104c7565b600061034361045a565b600160a060020a031633600160a060020a0316141561021c5761021561045a565b61036c61045a565b600160a060020a031633141561040957604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603260248201527f43616e6e6f742063616c6c2066616c6c6261636b2066756e6374696f6e20667260448201527f6f6d207468652070726f78792061646d696e0000000000000000000000000000606482015290519081900360840190fd5b610136610136565b7f7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c35490565b3660008037600080366000845af43d6000803e808015610455573d6000f35b3d6000fd5b7f10d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b5490565b610488816104eb565b60408051600160a060020a038316815290517fbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b9181900360200190a150565b7f10d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b55565b60006104f6826105ae565b151561058957604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152603b60248201527f43616e6e6f742073657420612070726f787920696d706c656d656e746174696f60448201527f6e20746f2061206e6f6e2d636f6e747261637420616464726573730000000000606482015290519081900360840190fd5b507f7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c355565b6000903b11905600a165627a7a72305820e6a0e94ea36527366a6a00202c99a28a36e0c44d2d0594a734640045e7169670002910d6a54a4754c8869d6886b5f5d7fbfa5b4522237ea5c60d11bc4e7a1ff9390b7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c30000000000000000000000006ffcb0f00c3ad2575e443152d8861aec1bda9ce6"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">myContract=eth.contract(abi)</span><br><span class="line"></span><br><span class="line">personal.unlockAccount(eth.accounts[0])</span><br><span class="line"></span><br><span class="line">contract=myContract.new(&#123;from:eth.accounts[0],data:code,gas:1000000&#125;)</span><br><span class="line"></span><br><span class="line">&gt; contract</span><br><span class="line">&#123;</span><br><span class="line">  abi: [&#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"upgradeTo"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;, &#123;...&#125;],</span><br><span class="line">      name: <span class="string">"upgradeToAndCall"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">true</span>,</span><br><span class="line">      stateMutability: <span class="string">"payable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">true</span>,</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: <span class="string">"implementation"</span>,</span><br><span class="line">      outputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"view"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"changeAdmin"</span>,</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: <span class="literal">true</span>,</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: <span class="string">"admin"</span>,</span><br><span class="line">      outputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"view"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"function"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      payable: <span class="literal">false</span>,</span><br><span class="line">      stateMutability: <span class="string">"nonpayable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"constructor"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      payable: <span class="literal">true</span>,</span><br><span class="line">      stateMutability: <span class="string">"payable"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"fallback"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      anonymous: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;, &#123;...&#125;],</span><br><span class="line">      name: <span class="string">"AdminChanged"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"event"</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      anonymous: <span class="literal">false</span>,</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: <span class="string">"Upgraded"</span>,</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">"event"</span></span><br><span class="line">  &#125;],</span><br><span class="line">  address: undefined,</span><br><span class="line">  transactionHash: <span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span></span><br><span class="line">&#125;</span><br><span class="line">查交易：</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>, </span><br><span class="line">	<span class="string">"id"</span>:1, </span><br><span class="line">	<span class="string">"method"</span>: <span class="string">"eth_getTransactionReceipt"</span>, </span><br><span class="line">	<span class="string">"params"</span>: [<span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span>] </span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>,</span><br><span class="line">    <span class="string">"id"</span>: 1,</span><br><span class="line">    <span class="string">"result"</span>: &#123;</span><br><span class="line">        <span class="string">"blockHash"</span>: <span class="string">"0x9de2bcfaa9c24789470746f4f4f50404695142cf1c207757b941edbebd3f19c3"</span>,</span><br><span class="line">        <span class="string">"blockNumber"</span>: <span class="string">"0x55d"</span>,</span><br><span class="line">        <span class="string">"contractAddress"</span>: <span class="string">"0xc5c2f2302562498c5d94dc50fd9d4aaaa97a9932"</span>,</span><br><span class="line">        <span class="string">"cumulativeGasUsed"</span>: <span class="string">"0xf4240"</span>,</span><br><span class="line">        <span class="string">"from"</span>: <span class="string">"0x12a97a88c217890aea39918b989b7ae1027295ad"</span>,</span><br><span class="line">        <span class="string">"gasUsed"</span>: <span class="string">"0xf4240"</span>,</span><br><span class="line">        <span class="string">"logs"</span>: [],</span><br><span class="line">        <span class="string">"logsBloom"</span>: <span class="string">"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">        <span class="string">"root"</span>: <span class="string">"0x809324d522480ba4ce3aa54b10465255e4919294b81a5605c3c2023e2f87de8e"</span>,</span><br><span class="line">        <span class="string">"to"</span>: null,</span><br><span class="line">        <span class="string">"transactionHash"</span>: <span class="string">"0xc3fa3a24b39a116717e89f9c3a44fc69a4b620f1a352173580baa759b661e51d"</span>,</span><br><span class="line">        <span class="string">"transactionIndex"</span>: <span class="string">"0x0"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无法调用合约时：contract = web3.eth.contract(abi).at(“0xc5c2f2302562498c5d94dc50fd9d4aaaa97a9932”)<br>contract.方法名称()</p>
+<h1 id="编译合约（以PAX为例）"><a href="#编译合约（以PAX为例）" class="headerlink" title="编译合约（以PAX为例）"></a>编译合约（以PAX为例）</h1><h2 id="下载合约源码"><a href="#下载合约源码" class="headerlink" title="下载合约源码"></a>下载合约源码</h2><p><a href="https://github.com/paxosglobal/pax-contracts" target="_blank" rel="noopener">https://github.com/paxosglobal/pax-contracts</a></p>
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><h3 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h3><p>下载：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>查看版本：node -v</p>
+<h3 id="truffle"><a href="#truffle" class="headerlink" title="truffle"></a>truffle</h3><p><code>npm install -g truffle</code><br><code>npm install truffle-hdwallet-provider</code></p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>将truffle.js重命名为truffle-config.js<h3 id="truffle-compile"><a href="#truffle-compile" class="headerlink" title="truffle compile"></a>truffle compile</h3>出现如下报错<img src="/image/eth_contract_compile.png" class="" title="eth_contract_compile %}
+将D:ToolETHpax-contracts-mastercontracts下的所有sol文件的pragma solidity ^0.4.28修改为pragma solidity &gt;=0.4.21 &lt;0.6.0;&lt;br&gt;出现如下报错&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+{% img &#x2F;image&#x2F;eth_contract_compile2.png eth_contract_compile2">
+
+<p>将D:\Tool\ETH\pax-contracts-master\contracts下的所有sol文件的pragma experimental “v0.5.0”注释<br>删除文件AdminUpgradeabilityProxy.sol及相关内容</p>
+<img src="/image/eth_contract_compile3.png" class="" title="eth_contract_compile3 %}
+
+{% img &#x2F;image&#x2F;eth_contract_compile4.png eth_contract_compile4">
+
+<img src="/image/eth_contract_compile5.png" class="" title="eth_contract_compile5 %}
+
+{% img &#x2F;image&#x2F;eth_contract_compile6.png eth_contract_compile6">
+
+<img src="/image/eth_contract_compile7.png" class="" title="eth_contract_compile7 %}
+
+
+&lt;h2 id=部署" alt="&gt;&lt;a href=#部署 class=headerlink title=部署&gt;&lt;&#x2F;a&gt;部署&lt;&#x2F;h2&gt;&lt;p&gt;启动geth需要开启rpc，需要挖矿，需要解锁账户。&lt;&#x2F;p&gt; {% img &#x2F;image&#x2F;eth_migrate.png eth_migrate %}
+&lt;p&gt;部署truffle migrate，执行命令后，会输出“Deploying Migrations…”，表示正在进行部署。&lt;&#x2F;p&gt;
+{% img &#x2F;image&#x2F;eth_migrate2.png eth_migrate2">
+
+<p>查看合约地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>, </span><br><span class="line">	<span class="string">"id"</span>:1, </span><br><span class="line">	<span class="string">"method"</span>: <span class="string">"eth_getTransactionReceipt"</span>, </span><br><span class="line">	<span class="string">"params"</span>: [<span class="string">"0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321"</span>] </span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"jsonrpc"</span>: <span class="string">"2.0"</span>,</span><br><span class="line">    <span class="string">"id"</span>: 1,</span><br><span class="line">    <span class="string">"result"</span>: &#123;</span><br><span class="line">        <span class="string">"blockHash"</span>: <span class="string">"0x8b54f351e61ed4343245c026e667fef9ec4bcc5176b5939d9ed5defd2f53f6fa"</span>,</span><br><span class="line">        <span class="string">"blockNumber"</span>: <span class="string">"0x8f"</span>,</span><br><span class="line">        <span class="string">"contractAddress"</span>: <span class="string">"0xc93a31c34c9517b8eb24173c9448a94a4f94c22f"</span>,</span><br><span class="line">        <span class="string">"cumulativeGasUsed"</span>: <span class="string">"0x44872"</span>,</span><br><span class="line">        <span class="string">"from"</span>: <span class="string">"0xbf584dd2094c0807d5fab99c77c6b9cc7423ef14"</span>,</span><br><span class="line">        <span class="string">"gasUsed"</span>: <span class="string">"0x22439"</span>,</span><br><span class="line">        <span class="string">"logs"</span>: [],</span><br><span class="line">        <span class="string">"logsBloom"</span>: <span class="string">"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">        <span class="string">"root"</span>: <span class="string">"0x706ea99b03604cad4b0ebe9b1fc9aec4bfede7b8ba3f826e9baf77c4cf70f854"</span>,</span><br><span class="line">        <span class="string">"to"</span>: null,</span><br><span class="line">        <span class="string">"transactionHash"</span>: <span class="string">"0x79d1b1ab89e1a7bca51016e7c26410d147f8011dffa1711e362ffdaa89a88321"</span>,</span><br><span class="line">        <span class="string">"transactionIndex"</span>: <span class="string">"0x1"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/image/eth_migrate3.png" class="" title="eth_migrate3 %}
+
+&lt;figure class=highlight bash" alt="&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=gutter&gt;&lt;pre&gt;&lt;span class=line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;5&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;6&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;7&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;8&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;9&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;10&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;11&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;12&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;13&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class=code&gt;&lt;pre&gt;&lt;span class=line&gt;Deploying &lt;span class=string&gt;Migrations&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; ----------------------&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; block number: 145&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; block timestamp: 1562742148&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; account: 0xbF584dd2094c0807d5FAb99c77c6b9cC7423Ef14&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; balance: 714.999999999999858655&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; gas used: 140345&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; gas price: 0.000000001 gwei&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; value sent: 0 ETH&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; total cost: 0.000000000000140345 ETH&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt;&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; -------------------------------------&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class=line&gt; &gt; Total cost: 0.000000000000140345">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://skyeblack.github.io/2019/11/06/eth_private/" data-id="ck2mzi5m50002e4u68agjbn8j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vue-npm-plugin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/05/vue-npm-plugin/" class="article-date">
@@ -474,220 +856,6 @@
 
 
   
-    <article id="post-vue-electron-packager" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/04/vue-electron-packager/" class="article-date">
-  <time datetime="2019-11-04T09:49:53.104Z" itemprop="datePublished">2019-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/vue-electron-packager/">VUE+ELECTRON打包桌面程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="下载electron资源"><a href="#下载electron资源" class="headerlink" title="下载electron资源"></a>下载electron资源</h1><p><code>git clone https://github.com/electron/electron-quick-start</code><br><code>注：npm install electron失败，提示删除重试，可能是node版本（过高）的问题</code></p>
-<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>在需要打包的项目中安装</p>
-<h2 id="安装electron"><a href="#安装electron" class="headerlink" title="安装electron"></a>安装electron</h2><p><code>npm install electron --save-dev</code></p>
-<img src="/image/vue_electron_install.png" class="" title="vue_electron_install">
-
-<h2 id="安装打包工具"><a href="#安装打包工具" class="headerlink" title="安装打包工具"></a>安装打包工具</h2><p><code>npm install electron-packager --save-dev</code></p>
-<img src="/image/vue_electron_packager.png" class="" title="vue_electron_packager">
-
-<h1 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h1><p>将electron/electron-quick-start项目下的main.js拷贝到需要打包的项目的根目录下（vue2放到build目录下），不要改名<br>注意修改文件中loadFile的文件路径，例如mainWindow.loadFile(‘./dist/index.html’)</p>
-<img src="/image/vue_electron_main.png" class="" title="vue_electron_main">
-
-<h1 id="修改package-json"><a href="#修改package-json" class="headerlink" title="修改package.json"></a>修改package.json</h1><ul>
-<li><p>添加”main”: “main.js”</p>
-</li>
-<li><p>添加启动命令：”start”: “electron .”</p>
-</li>
-<li><p>用<code>npm start</code>启动</p>
-<img src="/image/vue_electron_start.png" class="" title="vue_electron_start"></li>
-<li><p>可将”start”修改为其他名字，如”electron_dev”，用<code>npm run electron_dev</code>启动</p>
-<img src="/image/vue_electron_dev.png" class="" title="vue_electron_dev"></li>
-<li><p>可以在启动命令中添加<code>npm run build</code>，则执行该命令时将先执行一次build</p>
-<img src="/image/vue_electron_build.png" class="" title="vue_electron_build">
-<h1 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h1><p>按照步骤4中的命令启动，必须保证存在dist目录</p>
-<h1 id="白屏"><a href="#白屏" class="headerlink" title="白屏"></a>白屏</h1></li>
-<li><p>vue2</p>
-<img src="/image/vue_electron_white2.png" class="" title="vue_electron_white2"></li>
-<li><p>vue3</p>
-<img src="/image/vue_electron_white3.png" class="" title="vue_electron_white3">
-<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><h2 id="修改package-json-1"><a href="#修改package-json-1" class="headerlink" title="修改package.json"></a>修改package.json</h2><p><code>&quot;electron_build&quot;:&quot;electron-packager ./dist/ --out ./exe/ --platform=win32 --arch=x64 --icon=./public/header.ico --overwrite&quot;</code><br>electron-packager <sourcedir> <appname> –out <targetdir> –platform=<platform> –arch=<arch> –icon=headericodir [optional flags…]</p>
-<img src="/image/vue_electron_packager2.png" class="" title="vue_electron_packager2">
-
-</li>
-</ul>
-<h2 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h2><ul>
-<li>将项目中的<code>main.js</code>和<code>package.js</code>复制到dist目录下</li>
-<li>修改main.js的<code>mainWindow.loadFile(&#39;./index.html&#39;)</code><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2>运行打包命令<code>npm run electron_build</code><img src="/image/vue_electron_packager3.png" class="" title="vue_electron_packager3">
-
-</li>
-</ul>
-<img src="/image/vue_electron_packager4.png" class="" title="vue_electron_packager4">
-
-<img src="/image/vue_electron_packager5.png" class="" title="vue_electron_packager5">
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://skyeblack.github.io/2019/11/04/vue-electron-packager/" data-id="ck2k90kzb0000bsu6abz3chng" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vue-env-construction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/04/vue-env-construction/" class="article-date">
-  <time datetime="2019-11-04T06:43:22.144Z" itemprop="datePublished">2019-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/vue-env-construction/">VUE环境搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h1><p>下载安装：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>cmd查看版本：<code>node -v</code></p>
-<h1 id="更新npm"><a href="#更新npm" class="headerlink" title="更新npm"></a>更新npm</h1><p>可选操作<br>更新npm：<code>npm i npm to update</code><br>cmd查看版本：<code>npm -v</code></p>
-<h1 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h1><p>可选操作<br>cmd安装：<code>npm install -g cnpm –registry=http://registry.npm.taobao.org</code></p>
-<h1 id="安装vue-cli脚手架构建工具"><a href="#安装vue-cli脚手架构建工具" class="headerlink" title="安装vue-cli脚手架构建工具"></a>安装vue-cli脚手架构建工具</h1><p>cmd安装：<code>npm install -g vue-cli</code><br>卸载vue-cli：<code>npm uninstall vue-cli -g</code><br><code>安装vue-cli3.0(若已全局安装vue-cli 1.x,2.x，需卸载)：npm install -g @vue/cli 
-vue3.0要求nodejs&gt;=8.9</code></p>
-<h1 id="用vue-cli构建项目"><a href="#用vue-cli构建项目" class="headerlink" title="用vue-cli构建项目"></a>用vue-cli构建项目</h1><p>vue2.x：vue init webpack your-project-name<br>vue3.x：vue create your-project-name</p>
-<h1 id="安装项目所需的依赖"><a href="#安装项目所需的依赖" class="headerlink" title="安装项目所需的依赖"></a>安装项目所需的依赖</h1><p><code>npm install</code>或者<code>cnpm instsall</code><br>安装完成之后，会在项目目录文件夹中多出一个node_modules文件夹，这里边就是我们项目需要的依赖包资源。</p>
-<h1 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h1><p>v2.x: <code>npm run dev</code><br>v3.x: <code>npm run serve</code></p>
-<h1 id="VUE调试工具"><a href="#VUE调试工具" class="headerlink" title="VUE调试工具"></a>VUE调试工具</h1><p><a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="noopener">https://github.com/vuejs/vue-devtools</a></p>
- <img src="/image/vue_tool.png" class="" title="vue_tool">
-
- <img src="/image/vue_tool2.png" class="" title="vue_tool2">
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://skyeblack.github.io/2019/11/04/vue-env-construction/" data-id="ck2k6m7sa00033ku6dfjqhohy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git-operation" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/04/git-operation/" class="article-date">
-  <time datetime="2019-11-04T06:14:24.871Z" itemprop="datePublished">2019-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/git-operation/">GIT常用操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h1><p><a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a><br>默认操作下一步直到结束，可能第一步需要反复操作才能成功</p>
-<h1 id="下载安装Git"><a href="#下载安装Git" class="headerlink" title="下载安装Git"></a>下载安装Git</h1><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
-<h1 id="生成秘钥"><a href="#生成秘钥" class="headerlink" title="生成秘钥"></a>生成秘钥</h1><p>打开git-bash<br>$ ssh-keygen -t rsa -C “<a href="mailto:youremail@youremail.com" target="_blank" rel="noopener">youremail@youremail.com</a>“</p>
-<h1 id="添加秘钥"><a href="#添加秘钥" class="headerlink" title="添加秘钥"></a>添加秘钥</h1><ol>
-<li><p>先确认ssh-agent处于启用状态：eval “$(ssh-agent -s)”</p>
-</li>
-<li><p>输出类似于：Agent pid 32070</p>
-</li>
-<li><p>然后将SSH key添加到ssh-agent：ssh-add ~/.ssh/id_rsa</p>
-</li>
-<li><p>这时又会要你输入密码：Enter passphrase for /home/xxx/.ssh/id_rsa: 输入刚才记起来的密码</p>
-<img src="/image/git_prikey.png" class="" title="git_prikey">
-<h1 id="添加配置"><a href="#添加配置" class="headerlink" title="添加配置"></a>添加配置</h1><img src="/image/git_setting.png" class="" title="git-setting">
-<img src="/image/git_setting2.png" class="" title="git-setting2">
-
-</li>
-</ol>
-<img src="/image/git_setting3.png" class="" title="git-setting3">
-
-<p>复制.pub的<code>所有内容</code>到key并保存</p>
-<h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><p>这是全局配置，可以不配置<br>$ git config –global user.name “your name”<br>$ git config –global user.email “<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>“</p>
-<h1 id="检出仓库"><a href="#检出仓库" class="headerlink" title="检出仓库"></a>检出仓库</h1><p>可以使用客户端：<a href="https://desktop.github.com/" target="_blank" rel="noopener">https://desktop.github.com/</a><br>也可以使用git-bash</p>
-<img src="/image/git_clone.png" class="" title="git_clone">
-
-<img src="/image/git_clone2.png" class="" title="git_clone2">
-
-<h1 id="修改commit注释"><a href="#修改commit注释" class="headerlink" title="修改commit注释"></a>修改commit注释</h1><h2 id="修改最后一次注释"><a href="#修改最后一次注释" class="headerlink" title="修改最后一次注释"></a>修改最后一次注释</h2><p>如果你只想修改最后一次注释（就是最新的一次提交），那好办：<br><code>git commit --amend</code><br>出现有注释的界面（你的注释应该显示在第一行）， 输入<code>i</code>进入修改模式，修改好注释后，按<code>Esc</code>键 退出编辑模式，输入<code>:wq</code>保存并退出。ok，修改完成。</p>
-<h2 id="修改之前的某次注释"><a href="#修改之前的某次注释" class="headerlink" title="修改之前的某次注释"></a>修改之前的某次注释</h2><ol>
-<li><p>输入：<br><code>git rebase -i HEAD~2</code><br>最后的数字<code>2</code>指的是显示到倒数第几次，比如这个输入的2就会显示倒数的两次注释（最上面两行）</p>
-<img src="/image/git_rebase.png" class="" title="git_rebase">
-</li>
-<li><p>修改状态<br>将要修改的注释前面的<code>pick</code>换成<code>edit</code>。<br>方法就是上面说的编辑方式：<code>i</code>—编辑，把<code>pick</code>换成<code>edit</code>—<code>Esc</code>—<code>:wq</code>.</p>
-</li>
-</ol>
-<ol start="3">
-<li><p>修改注释：<br> <code>git commit --amend</code></p>
- <img src="/image/git_amend.png" class="" title="git_amend">
-<p> <code>i</code>—编辑，修改好后<code>Esc</code>—<code>:wq</code>.</p>
-</li>
-<li><p>继续修改：<br> <code>git rebase --continue</code></p>
- <img src="/image/git_rebase2.png" class="" title="git_rebase2">
-</li>
-<li><p>跳过修改：<br> <code>git rebase --skip</code></p>
- <img src="/image/git_skip.png" class="" title="git_skip">
-
-<img src="/image/git_skip2.png" class="" title="git_skip2">
-</li>
-<li><p>修改完成<br> <code>git pull</code><br> <code>git push</code></p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://skyeblack.github.io/2019/11/04/git-operation/" data-id="ck2k6m7r500003ku66vk98yf5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -724,23 +892,23 @@ vue3.0要求nodejs&gt;=8.9</code></p>
       <ul>
         
           <li>
+            <a href="/2019/11/06/eth_cmd/">ETH节点命令</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/eth_keythereum/">keythereum使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/eth_private/">ETH私链</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/05/vue-npm-plugin/">npm插件开发(基于vue-cli3.x)</a>
           </li>
         
           <li>
             <a href="/2019/11/05/vue-html-component/">在纯html页引入组件</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/05/vue-faq/">vue常见问题</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/05/os-win10-remoteerror/">win10远程错误配置</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/05/csharp-autoupdate/">C#自动更新程序</a>
           </li>
         
       </ul>
